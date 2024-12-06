@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 45 450 100" preserveAspectRatio="xMidYMid meet" aria-labelledby="logo-title" role="img">
+    <title id="logo-title">Rede Virtual Net</title>
+    <g>
+        <path class="wifi-signal-4" d="M63 115c1-23 21-38 39-38v-5c-28 0-45 22-45 43h6"/>
+        <path class="wifi-signal-3" d="M75 115c0-15 12-27 27-27v-7c-16 1-33 15-33 34h6"/>
+        <path class="wifi-signal-2" d="M86 115a16 16 0 0 1 16-16v-6c-12 0-22 10-22 22h6"/>
+        <path d="M98 106c2 0 4 2 4 5 0 2-2 4-4 4-3 0-5-2-5-4 0-3 2-5 5-5" fill="#ff9800"/>
+        <text x="105" y="100" font-size="40" fill="white" font-weight="bold">REDE VIRTUAL</text>
+        <text x="385" y="100" font-size="40" fill="#ef6c00" font-weight="bold">NET</text>
+        <text x="107.5" y="115" font-size="16" fill="#6c757d" font-weight="500">
+            A INTERNET MAIS RÁPIDA DO MERCADO
+        </text>
+    </g>
+</svg>
