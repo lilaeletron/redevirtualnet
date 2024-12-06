@@ -1,0 +1,92 @@
+# -----------------------------------------
+# ARQUIVOS PYTHON / DJANGO
+# -----------------------------------------
+*.py[cod]
+__pycache__/
+*.so
+*.egg-info/
+*.egg
+*.pyo
+*.pyd
+*.pdb
+
+# Migrações compiladas e cache de migrações
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Banco de dados local (caso use SQLite)
+db.sqlite3
+*.sqlite3
+
+# Arquivos de ambiente e credenciais
+.env
+*.env
+.env.*
+
+# Configurações locais que não devem ir para o repo
+local_settings.py
+settings_local.py
+
+# Logs e arquivos temporários
+*.log
+*.pot
+*.pid
+*.pyc
+*.pyo
+*.lock
+*.mo
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Diretórios criados por testes
+htmlcov/
+.coverage
+.tox/
+.test/
+.cache/
+pytest_cache/
+
+# -----------------------------------------
+# FRONTEND / NODE / BUILD TOOLS
+# -----------------------------------------
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock (opcional, se não quiser versionar o lockfile)
+package-lock.json (opcional, se não quiser versionar o lockfile)
+bower_components/
+coverage/
+
+# -----------------------------------------
+# AMBIENTES VIRTUAIS E IDEs
+# -----------------------------------------
+venv/
+.vscode/
+.idea/
+*.iml
+
+# -----------------------------------------
+# ESTÁTICOS E MEDIA (caso não queira versionar os gerados)
+# -----------------------------------------
+staticfiles/
+media/
+collected_static/
+compressed/
+
+# -----------------------------------------
+# ARQUIVOS DE COMPILAÇÃO E DEPLOY
+# -----------------------------------------
+*.bak
+*.orig
+*.rej
+*.~*
+*.crt
+*.key
+*.pem
+
+# -----------------------------------------
+# OUTRAS FERRAMENTAS (caso use)
+# -----------------------------------------
+celerybeat-schedule
