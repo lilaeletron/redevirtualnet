@@ -1,0 +1,197 @@
+/******************************************************************************
+ * ARQUIVO UNIFICADO DE ESTILOS DO HEADER
+ * --------------------------------------
+ * Este arquivo combina todos os trechos de CSS fornecidos, referentes ao
+ * header e seus componentes (botão "Assine Agora", navegação, dropdowns, temas,
+ * ícones sociais, animações, etc.).
+ *
+ * Objetivo:
+ * - Facilitar a manutenção ao manter todo o CSS do header em um único lugar.
+ * - Preservar o layout atual, sem mudanças estruturais.
+ * - Fornecer comentários extensivos para orientar a equipe de desenvolvimento.
+ *
+ * Seções Principais:
+ * 1. Variáveis e Temas (Light/Dark)
+ * 2. Estilos Globais e Body
+ * 3. Header e Divisores
+ * 4. Navegação (Nav-Links, Dropdowns, Responsividade)
+ * 5. Botão "Assine Agora" e Efeito de Pulsação
+ * 6. Área do Cliente (Link Específico)
+ * 7. Animações Wi-Fi e Logo
+ * 8. Ícones Sociais (Desktop)
+ *
+ *****************************************************************************/
+
+/*==============================================
+=            1. VARIÁVEIS E TEMAS              =
+==============================================*/
+
+/* Temas Light e Dark */
+.light-theme {
+    --background-color: #ffffff;
+    --background-header: linear-gradient(180deg, #0d47a1, #1565c0);
+    --text-color: #000000;
+    --item-hover: #ff9800;
+}
+
+.dark-theme {
+    --background-color: #3a3a3a;
+    --background-header: linear-gradient(180deg, #102c3a, #133a4a);
+    --text-color: #ffffff;
+    --item-hover: #ff9800;
+}
+
+/* Botão de Toggle de Tema */
+.toggle-theme-btn {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    color: var(--bs-light);
+}
+
+.toggle-theme-btn:hover {
+    color: var(--item-hover);
+}
+
+/*==============================================
+=          2. ESTILOS GLOBAIS E BODY           =
+==============================================*/
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 14px; /* Tamanho base da fonte */
+}
+
+/*==============================================
+=            3. HEADER E DIVISORES             =
+==============================================*/
+
+/* Estilização do header (fundos e cores) */
+header {
+    background: var(--background-header);
+    color: #ffffff;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Divisor Vertical (vr-divider) usado para separar elementos no header */
+.vr-divider {
+    background-color: var(--bs-secondary);
+    width: 1px;
+    height: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+/*==============================================
+=          4. NAVEGAÇÃO (NAV-LINKS, DROPDOWNS)=
+==============================================*/
+
+/* Nav-Links Gerais do Header */
+.nav-link {
+    color: #ffffff; /* Texto branco por padrão */
+    transition: color 0.3s ease; /* Transição suave para mudança de cor */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #ff9800; /* Altera a cor para laranja no hover/focus */
+}
+
+.nav-link.active {
+    color: #ff9800 !important; /* Link ativo destacado em laranja */
+    font-weight: bold;         /* Negrito para reforçar o estado ativo */
+}
+
+/* Dropdowns do Header */
+.dropdown-menu {
+    background-color: var(--bs-dark);
+    border: none;
+    text-align: center; /* Centraliza o texto nos itens do dropdown */
+}
+
+.dropdown-item {
+    color: #ffffff; /* Itens do dropdown em branco */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.dropdown-item:hover {
+    background-color: #ff9800; /* Fundo laranja ao passar o mouse */
+    color: var(--bs-dark);     /* Texto escuro sobre fundo laranja */
+}
+
+/* Responsividade para Telas Menores */
+@media (max-width: 576px) {
+    .navbar-brand svg {
+        height: 40px; /* Reduz a altura do logo no mobile */
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 0.75rem; /* Mais espaço para cliques em telas menores */
+    }
+}
+
+/*==============================================
+=     5. BOTÃO "ASSINE AGORA" E PULSAÇÃO       =
+==============================================*/
+
+/* Botão "Assine Agora" com Animação de Pulso */
+.assine-agora {
+    color: #ffffff; /* Texto branco */
+    background-color: var(--item-hover); /* Fundo escuro igual aos dropdowns (ajustada para item-hover se desejar) */
+    border-radius: 4px; /* Bordas arredondadas */
+    text-decoration: none; /* Sem sublinhado */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0 0 rgba(255, 152, 0, 0); /* Inicializa o box-shadow */
+    animation: pulse 2s infinite; /* Animação de pulsação contínua */
+}
+
+.assine-agora:hover {
+    background-color: #ff9800; /* Fundo laranja no hover */
+    color: #ffffff !important; /* Mantém o texto branco para legibilidade */
+    transform: scale(1.05);    /* Leve aumento de tamanho no hover */
+}
+
+/* Animação Pulse para o Botão "Assine Agora" */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7); /* Pequena sombra laranja */
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 152, 0, 0); /* Expande a sombra e a torna transparente */
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); /* Retorna ao estado inicial */
+    }
+}
+/*==============================================
+=       8. ÍCONES SOCIAIS (DESKTOP)            =
+==============================================*/
+
+/* Estilização dos ícones de redes sociais exibidos no desktop */
+.desktop-social-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Ajuste o espaçamento entre os ícones conforme necessário */
+}
+
+.desktop-social-icons a {
+    display: inline-block;
+    text-decoration: none; /* Remove sublinhado dos links */
+}
+
+.desktop-social-icons .icon {
+    display: block; /* Remove espaçamento inline */
+    width: 20px; /* Ajuste do tamanho conforme necessário */
+    height: 20px;
+    vertical-align: middle; /* Alinhamento vertical */
+    fill: var(--bs-light); /* Cor dos ícones */
+}
+
+.icon:hover {
+    fill: var(--item-hover); /* Ícone muda de cor ao hover */
+}
+

@@ -1,0 +1,127 @@
+        <nav class="navbar navbar-expand-lg p-0 m-0 d-lg-none" aria-label="Menu principal Mobile">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <!-- Logo à esquerda -->
+                <a class="navbar-brand d-flex align-items-center ms-2" href="#" aria-label="Página inicial">
+                    <svg class="mobile-logo" width="auto" height="40" role="img" aria-labelledby="logo-title-mobile">
+                        <title id="logo-title-mobile">Rede Virtual Net</title>
+                        <use href="#rede-virtual-net"></use>
+                    </svg>
+                </a>
+
+                <!-- Botão Hamburguer à direita -->
+                <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu"
+                    aria-controls="mobileMenu" aria-expanded="false" aria-label="Exibir ou ocultar menu de navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="mobileMenu">
+                <ul class="navbar-nav w-100 text-center">
+                    <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="institucionalDropdownMobile" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Institucional (Mobile)">
+                            Institucional
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="institucionalDropdownMobile">
+                            <li><a class="dropdown-item" href="#">Quem Somos</a></li>
+                            <li><a class="dropdown-item" href="#">Missão, Visão e Valores</a></li>
+                            <li><a class="dropdown-item" href="#">Contato</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="planosDropdownMobile" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Planos (Mobile)">
+                            Planos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="planosDropdownMobile">
+                            <li><a class="dropdown-item" href="#">Internet Fibra</a></li>
+                            <li><a class="dropdown-item" href="#">Telefonia</a></li>
+                            <li><a class="dropdown-item" href="#">Telemedicina</a></li>
+                            <li><a class="dropdown-item" href="#">TV e Streaming</a></li>
+                            <li><a class="dropdown-item" href="#">Combos Personalizados</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ferramentasDropdownMobile" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Ferramentas (Mobile)">
+                            Ferramentas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ferramentasDropdownMobile">
+                            <li><a class="dropdown-item" href="#">Simulador de Planos</a></li>
+                            <li><a class="dropdown-item" href="#">Teste de Velocidade</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="suporteDropdownMobile" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Suporte (Mobile)">
+                            Suporte
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="suporteDropdownMobile">
+                            <li><a class="dropdown-item" href="#">FAQ</a></li>
+                            <li><a class="dropdown-item" href="#">Suporte Técnico</a></li>
+                            <li><a class="dropdown-item" href="#">Reclamações</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#">Área do Cliente</a></li>
+                </ul>
+
+                <hr class="my-3">
+
+                <div class="text-center mb-3">
+                    <div class="dropdown mb-3">
+                        <button class="btn btn-link d-flex align-items-center w-100 text-start dropdown-toggle"
+                            id="mobileBd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown"
+                            aria-label="Alternar tema (Mobile)">
+                            <svg class="bi my-1 theme-icon-active me-2" width="1em" height="1em">
+                                <use href="#circle-half"></use>
+                            </svg>
+                            Mudar Tema
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu shadow" aria-labelledby="mobileBd-theme">
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="light" aria-pressed="false"
+                                    aria-label="Ativar tema claro (mobile)">
+                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                        <use href="#sun-fill"></use>
+                                    </svg>
+                                    Claro
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center"
+                                    data-bs-theme-value="dark" aria-pressed="false"
+                                    aria-label="Ativar tema escuro (mobile)">
+                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                        <use href="#moon-stars-fill"></use>
+                                    </svg>
+                                    Escuro
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item d-flex align-items-center active"
+                                    data-bs-theme-value="auto" aria-pressed="true"
+                                    aria-label="Ativar tema automático (mobile)">
+                                    <svg class="bi me-2 opacity-50" width="1em" height="1em">
+                                        <use href="#circle-half"></use>
+                                    </svg>
+                                    Automático
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="social-icons mb-3">
+                        <a href="#" aria-label="WhatsApp da Rede Virtual Net"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="TikTok da Rede Virtual Net"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook da Rede Virtual Net"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram da Rede Virtual Net"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>

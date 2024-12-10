@@ -1,53 +1,38 @@
+<!DOCTYPE html>
 {% load static %}
 {% load bootstrap5 %}
-<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <!-- Configuração de codificação para UTF-8 -->
     <meta charset="UTF-8">
-
-    <!-- Design responsivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Título dinâmico -->
     <title>{% block title %}Rede Virtual Net{% endblock %}</title>
 
-    <!-- Bootstrap CSS via django-bootstrap5 -->
-    {% bootstrap_css %}
+    <!-- Theme init -->
+    <script src="{% static 'js/theme-init.js' %}"></script>
 
-    <!-- CSS customizados -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- Header -->
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/logo-animations.css' %}">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-    {% block extra_head %}{% endblock %}
 </head>
 
 <body>
-    <!-- SVG Sprite -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-        {% include 'components/svg/logo.svg' %}
-        {% include 'components/svg/icons.svg' %}
-    </svg>
 
-    <!-- Cabeçalho -->
-    {% include 'components/header.html' %}
+<!-- Header Desktop -->
+{% include 'components/header-desktop.html' %}
+<!-- Header Mobile -->
 
-    <!-- Conteúdo dinâmico -->
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
-    </main>
+<main class="container mt-4">
+    {% block content %}{% endblock %}
+</main>
 
-    <!-- Rodapé -->
-    {% include 'components/footer.html' %}
 
-    <!-- Bootstrap JS via django-bootstrap5 -->
-    {% bootstrap_javascript %}
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/toggle-theme.js' %}"></script>
 
-    <!-- JS Customizado-->
-    <script src="{% static 'js/header.js' %}"></script>
-    {% block extra_js %}{% endblock %}
 </body>
 
 </html>

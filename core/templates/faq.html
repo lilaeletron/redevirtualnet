@@ -1,0 +1,23 @@
+<!-- main/templates/main/faq.html -->
+{% extends 'base.html' %}
+
+{% block title %}FAQ - Rede Virtual Net{% endblock %}
+
+{% block content %}
+<h1>FAQ</h1>
+<div class="accordion" id="faqAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Como contratar um plano?
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Você pode contratar um plano diretamente pelo nosso site na seção "Assine Agora" ou entrando em contato com nosso suporte.
+            </div>
+        </div>
+    </div>
+    <!-- Adicione mais itens de FAQ conforme necessário -->
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+<!-- Header -->
+<header>
+    <!-- Navbar Principal -->
+    <nav class="navbar navbar-expand-lg d-none d-lg-flex" aria-label="Menu principal Desktop">
+        <div class="container d-flex align-items-center justify-content-between border border-secondary">
+
+            <!-- Logo da Empresa -->
+            <a class="navbar-brand d-flex align-items-center m-0 p-0" href="{% url 'index' %}" aria-label="Página inicial">
+                <svg width="100%" height="55" role="img" aria-labelledby="logo-title">
+                    <title id="logo-title">Rede Virtual Net</title>
+                    <use href="/static/svg/sprite.svg#rede-virtual-net"></use>
+                </svg>
+            </a>
+
+            <!-- Menu de Navegação Principal -->
+            <ul class="navbar-nav me-auto mb-lg-0 m-0 p-0">
+
+                <!-- Item de Menu: Início -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'index' %}">Início</a>
+                </li>
+
+                <!-- Item de Menu com Dropdown: Planos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="planosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Planos">
+                        Planos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="planosDropdown">
+                        <li><a class="dropdown-item" href="{% url 'internet_fibra' %}">Internet Fibra</a></li>
+                        <li><a class="dropdown-item" href="{% url 'telefonia' %}">Telefonia</a></li>
+                        <li><a class="dropdown-item" href="{% url 'telemedicina' %}">Telemedicina</a></li>
+                        <li><a class="dropdown-item" href="{% url 'tv_streaming' %}">TV e Streaming</a></li>
+                        <li><a class="dropdown-item" href="{% url 'combos_personalizados' %}">Combos Personalizados</a></li>
+                    </ul>
+                </li>
+
+                <!-- Item de Menu com Dropdown: Suporte -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="suporteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Suporte">
+                        Suporte
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="suporteDropdown">
+                        <li><a class="dropdown-item" href="{% url 'faq' %}">FAQ</a></li>
+                        <li><a class="dropdown-item" href="{% url 'suporte_tecnico' %}">Suporte Técnico</a></li>
+                        <li><a class="dropdown-item" href="{% url 'reclamacoes' %}">Reclamações</a></li>
+                    </ul>
+                </li>
+
+                <!-- Item de Menu com Dropdown: Ferramentas -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ferramentasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Ferramentas">
+                        Ferramentas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="ferramentasDropdown">
+                        <li><a class="dropdown-item" href="{% url 'simulador_planos' %}">Simulador de Planos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'teste_velocidade' %}">Teste de Velocidade</a></li>
+                    </ul>
+                </li>
+
+                <!-- Item de Menu com Dropdown: Institucional -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="institucionalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu Institucional">
+                        Institucional
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="institucionalDropdown">
+                        <li><a class="dropdown-item" href="{% url 'quem_somos' %}">Quem Somos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'missao_visao_valores' %}">Missão, Visão e Valores</a></li>
+                        <!-- Aqui você precisa definir a rota de Contato no urls.py se quiser que o link funcione -->
+                        <li><a class="dropdown-item" href="#">Contato</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Seção de Redes Sociais e Tema no Desktop -->
+            <div class="d-flex align-items-center">
+                <div class="vr-divider"></div>
+                {% include 'components/social-icons.html' %}
+                <div class="vr-divider"></div>
+                {% include 'components/toggle-theme.html' %}
+                <div class="vr-divider"></div>
+            </div>
+
+            <!-- Seção de Links "Área do Cliente" e "Assine Agora" -->
+            <div class="d-flex align-items-center">
+                <div class="nav-item">
+                    <a class="nav-link p-2 m-2 area-cliente fw-bold" href="{% url 'area_cliente' %}" aria-label="Área do Cliente">
+                        Área do Cliente
+                    </a>
+                </div>
+                <div class="nav-item me-4">
+                    <a class="nav-link p-2 assine-agora fw-bold" href="{% url 'assine_agora' %}" aria-label="Assine Agora">
+                        Assine Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

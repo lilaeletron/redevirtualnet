@@ -1,0 +1,14 @@
+<!-- main/templates/main/assine_agora.html -->
+{% extends 'base.html' %}
+
+{% block title %}Assine Agora - Rede Virtual Net{% endblock %}
+
+{% block content %}
+<h1>Assine Agora</h1>
+<p>Escolha o plano que melhor se adapta às suas necessidades e comece a desfrutar dos nossos serviços de internet de alta qualidade.</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Assinar Agora</button>
+</form>
+{% endblock %}
