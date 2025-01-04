@@ -1,8 +1,93 @@
 <!-- main/templates/main/index.html -->
+
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Início - Rede Virtual Net{% endblock %}
 
 {% block content %}
 
+    <section id="carousel-section">
+        <div id="id-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for item in carousel_images %}
+                    <button
+                            type="button"
+                            data-bs-target="#id-carousel"
+                            data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="{% if forloop.counter0 == carousel_is_active %} active {% endif %}"
+                            aria-current="{% if forloop.counter0 == carousel_is_active %} true {% endif %}"
+                            aria-label="Slide {{ forloop.counter0 }}">
+                    </button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for item in carousel_images %}
+                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %} active {% endif %}">
+                        <img src="{% static 'img/' %}{{ item }}" class="d-block w-100 h-100"
+                             alt="Imagem {{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
+    <section class="container mt-3 mb-3">
+
+        <header class="text-center mb-3 border border-warning">
+            <h3>Combos</h3>
+            <p class="fw-semibold">Escolha o combo ideal para você</p>
+        </header>
+
+        <article class="card text-center">
+            <header class="card-header h4 text-white fw-semibold">
+                Básico
+            </header>
+            <div class="card-body custom-card">
+                <h5 class="card-title">R$ 100/Mês</h5>
+                <ul class="list-unstyled fw-semibold p-2 fs-6">
+                    <li class="m-1">📶 <a href="/300-megas"
+                                         class="link-body-emphasis link-opacity-50-hover link-underline-opacity-0">300
+                        Megas</a></li>
+                    <li class="m-1">📶 <a href="/wifi-turbo"
+                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Wi-Fi
+                        Turbo</a></li>
+                    <li class="m-1">🔄 <a href="/sem-interrupcoes"
+                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Sem
+                        interrupções</a></li>
+                    <li class="m-1">📞 <a href="/linha-telefonica"
+                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Linha
+                        telefônica</a></li>
+                    <li class="m-1">❤️ <a href="/telemedicina"
+                                          class="link-warning link-opacity-50-hover link-underline-opacity-0">Telemedicina</a>
+                    </li>
+                    <li class="m-1">📞 <a href="/suporte-24h"
+                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Suporte
+                        24h</a></li>
+                    <li class="m-1">🔧 <a href="/servico-escolha"
+                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">+01 Serviço
+                        de sua escolha</a></li>
+                </ul>
+                <a class="p-2 assine-agora fw-bold" href="{% url 'assine_agora' %}" aria-label="Assine Agora">
+                    Assine Agora
+                </a>
+            </div>
+        </article>
+    </section>
+
+
+
+
 {% endblock %}
+

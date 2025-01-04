@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 {% load static %}
 {% load bootstrap5 %}
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -17,6 +17,15 @@
     <!-- Header -->
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
 
+    <!-- Chat -->
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+    <!-- Hero-Section -->
+    <link rel="stylesheet" href="{% static 'css/hero-section.css' %}">
+
+<!-- Hero-Section -->
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+
 </head>
 
 <body>
@@ -25,13 +34,23 @@
 {% include 'components/header-desktop.html' %}
 <!-- Header Mobile -->
 
-<main class="container mt-4">
+<main>
     {% block content %}{% endblock %}
 </main>
 
 
+<!-- Chat Desktop -->
+{% include 'components/chat_widget.html' %}
+
+
+{% include 'components/footer.html' %}
+
+<!-- Bootstrap Js-->
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Custom js -->
 <script src="{% static 'js/toggle-theme.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
 
 </body>
 

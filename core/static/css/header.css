@@ -28,14 +28,14 @@
 
 /* Temas Light e Dark */
 .light-theme {
-    --background-color: #ffffff;
+    --background-color: var(--bs-light);
     --background-header: linear-gradient(180deg, #0d47a1, #1565c0);
     --text-color: #000000;
     --item-hover: #ff9800;
 }
 
 .dark-theme {
-    --background-color: #3a3a3a;
+    --background-color: var(--bs-dark);
     --background-header: linear-gradient(180deg, #102c3a, #133a4a);
     --text-color: #ffffff;
     --item-hover: #ff9800;
@@ -194,4 +194,3 @@ header {
 .icon:hover {
     fill: var(--item-hover); /* Ícone muda de cor ao hover */
 }
-

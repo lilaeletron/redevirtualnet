@@ -1,0 +1,12 @@
+.carousel-item {
+  height: 60vh;
+}
+
+.carousel-item .btn {
+  margin-top: 15px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Altera as setas para branco em fundos escuros */
+}
