@@ -38,3 +38,66 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const serviceDropdown = document.getElementById("serviceDropdown");
+    const addServiceButton = document.getElementById("addService");
+    const resetButton = document.getElementById("resetServices");
+    const selectedServices = document.getElementById("selectedServices");
+    const totalPrice = document.getElementById("totalPrice");
+
+    let total = 0;
+
+    // Adicionar Serviço ao Combo
+    addServiceButton.addEventListener("click", () => {
+        const selectedOption = serviceDropdown.options[serviceDropdown.selectedIndex];
+
+        // Verifica se o cliente selecionou um serviço
+        if (!selectedOption || !selectedOption.value) {
+            alert("Por favor, selecione um serviço antes de adicionar.");
+            return;
+        }
+
+        const serviceId = selectedOption.value;
+        const serviceName = selectedOption.getAttribute("data-name");
+        const servicePrice = parseFloat(selectedOption.getAttribute("data-price"));
+        const serviceDescription = selectedOption.getAttribute("data-descricao");
+
+        // Criar item na lista de serviços selecionados
+        const listItem = document.createElement("li");
+        listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+        listItem.innerHTML = `
+            <span>
+                <strong>📦 ${serviceName}</strong>
+                <br>
+                <small>✏️ ${serviceDescription || "Sem descrição disponível"}</small>
+            </span>
+            <div>
+                <span class="badge bg-primary rounded-pill">R$ ${servicePrice.toFixed(2)}</span>
+                <button class="btn btn-danger btn-sm ms-2 remove-item">❌</button>
+            </div>
+        `;
+
+        selectedServices.appendChild(listItem);
+
+        // Atualizar total
+        total += servicePrice;
+        totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+
+        // Adicionar funcionalidade de remover
+        const removeButton = listItem.querySelector(".remove-item");
+        removeButton.addEventListener("click", () => {
+            listItem.remove();
+            total -= servicePrice;
+            totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+        });
+    });
+
+    // Resetar Seleção
+    resetButton.addEventListener("click", () => {
+        selectedServices.innerHTML = "";
+        total = 0;
+        totalPrice.textContent = `Total: R$ ${total.toFixed(2)}`;
+    });
+});
+

@@ -1,7 +1,7 @@
 <!-- main/templates/main/index.html -->
-
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}Início - Rede Virtual Net{% endblock %}
 
@@ -41,53 +41,77 @@
             </button>
         </div>
     </section>
+    
+    <section class="container my-4">
+        <div class="text-center mb-3 text-animated">
+            <p class="h3 my-3 m-0">Escolha o plano perfeito para você e sua família.</p>
+        </div>
+        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs" role="tablist">
+            {% for tipo in tipos %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link card-header {% if forloop.first %}active{% endif %}"
+                            id="{{ tipo }}-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#{{ tipo }}"
+                            type="button"
+                            role="tab"
+                            aria-controls="{{ tipo }}"
+                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                        {{ tipo|capfirst }}
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            {% for tipo in tipos %}
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+                     id="{{ tipo }}"
+                     role="tabpanel"
+                     aria-labelledby="{{ tipo }}-tab">
 
+                    <div class="container-fluid">
+                        <!-- Iniciando uma nova row -->
+                        <div class="row g-5 mt-0 justify-content-evenly">
+                            {% for assinatura in assinaturas|get_item:tipo %}
+                                <!-- Abrir nova linha a cada 3 itens -->
+                                {% if forloop.counter0|divisibleby:3 %}
+                                    </div>
+                                    <div class="row g-5 mt-0 justify-content-evenly">
+                                {% endif %}
 
-    <section class="container mt-3 mb-3">
-
-        <header class="text-center mb-3 border border-warning">
-            <h3>Combos</h3>
-            <p class="fw-semibold">Escolha o combo ideal para você</p>
-        </header>
-
-        <article class="card text-center">
-            <header class="card-header h4 text-white fw-semibold">
-                Básico
-            </header>
-            <div class="card-body custom-card">
-                <h5 class="card-title">R$ 100/Mês</h5>
-                <ul class="list-unstyled fw-semibold p-2 fs-6">
-                    <li class="m-1">📶 <a href="/300-megas"
-                                         class="link-body-emphasis link-opacity-50-hover link-underline-opacity-0">300
-                        Megas</a></li>
-                    <li class="m-1">📶 <a href="/wifi-turbo"
-                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Wi-Fi
-                        Turbo</a></li>
-                    <li class="m-1">🔄 <a href="/sem-interrupcoes"
-                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Sem
-                        interrupções</a></li>
-                    <li class="m-1">📞 <a href="/linha-telefonica"
-                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Linha
-                        telefônica</a></li>
-                    <li class="m-1">❤️ <a href="/telemedicina"
-                                          class="link-warning link-opacity-50-hover link-underline-opacity-0">Telemedicina</a>
-                    </li>
-                    <li class="m-1">📞 <a href="/suporte-24h"
-                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">Suporte
-                        24h</a></li>
-                    <li class="m-1">🔧 <a href="/servico-escolha"
-                                         class="link-warning link-opacity-50-hover link-underline-opacity-0">+01 Serviço
-                        de sua escolha</a></li>
-                </ul>
-                <a class="p-2 assine-agora fw-bold" href="{% url 'assine_agora' %}" aria-label="Assine Agora">
-                    Assine Agora
-                </a>
-            </div>
-        </article>
+                                <!-- Cada card ocupa 1/3 da largura -->
+                                <article class="card text-center col-12 col-md-3 p-0">
+                                    <header class="card-header h4 text-white fw-semibold p-3">
+                                        {{ assinatura.nome }}
+                                    </header>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-success">R$ {{ assinatura.preco }}/mês</h5>
+                                        <ul class="list-unstyled fw-semibold p-2 fs-6">
+                                            {% for descricao, link in assinatura.descricoes_links %}
+                                                <li class="m-3">
+                                                    <a href="#" class="link-custom">
+                                                        {{ descricao|capfirst }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <footer class="card-footer p-3">
+                                        <a class="p-2 assine-agora fw-bold h5" href="{% url 'assine_agora' %}"
+                                           aria-label="Assine Agora">
+                                            Assine Agora
+                                        </a>
+                                    </footer>
+                                </article>
+                            {% endfor %}
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
 
-
-
-
 {% endblock %}
+
+
 

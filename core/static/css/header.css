@@ -194,3 +194,9 @@ header {
 .icon:hover {
     fill: var(--item-hover); /* Ícone muda de cor ao hover */
 }
+
+.badge.bg-secondary {
+  background-color: rgba(108,117,125,0.5); /* ou outra cor */
+  color: var(--text-color) !important;
+  /* Ajuste conforme o tema */
+}

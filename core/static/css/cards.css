@@ -1,6 +1,260 @@
-.card-body{
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-size: 14px; /* Tamanho base da fonte */
+.card-body, .card-footer {
+    background: var(--background-header);
+    color: #ffffff;
+    transition: background 0.3s ease, color 0.3s ease;
 }
+
+.link-custom {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-custom:hover {
+    color: var(--item-hover); /* Cor do hover para o tema */
+}
+
+article.card {
+    border: 2px solid cyan;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px cyan, 0px 0px 20px cyan inset;
+}
+
+article.card:hover {
+    border: 2px solid var(--item-hover);
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px var(--item-hover), 0px 0px 20px var(--item-hover) inset;
+}
+
+.text-animated {
+    background: linear-gradient(90deg, #ff8a00, #e52e71, #00c6ff);
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    animation: text-animation 2s infinite;
+}
+
+@keyframes text-animation {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+.nav-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.card-header {
+    color: var(--text-color);
+}
+
+/* ====================================
+   Transições para Abas (Tabs)
+   ==================================== */
+
+/* === Fade Simples === */
+/*
+.tab-pane {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.tab-pane.show {
+    opacity: 1;
+}
+*/
+
+/* === Zoom In === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: scale(1);
+}
+*/
+
+/* === Slide Horizontal === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+*/
+
+/* === Slide Vertical === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+*/
+
+/* === Rotação Horizontal === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: rotateY(-90deg);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: rotateY(0);
+}
+*/
+
+/* === Rotação Vertical === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: rotateX(0);
+}
+*/
+
+/* === Deslocamento com Desfoque (Blur) === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: translateX(-20px);
+    filter: blur(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+}
+*/
+
+/* === Zoom Out === */
+/*
+.tab-pane {
+    opacity: 0;
+    transform: scale(1.2);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: scale(1);
+}
+*/
+
+/* === Clip-Path (Revelação) === */
+/*
+.tab-pane {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition: opacity 0.5s ease, clip-path 0.5s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+}
+*/
+
+/* === Fade com Movimento (Para Cima) === */
+.tab-pane {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tab-pane.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+#cartTotal {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+
+
+
+
+
+.combo-page {
+    background-color: #f8f9fa; /* Fundo leve e elegante */
+    padding: 20px;
+}
+
+.combo-page .card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.combo-page .card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.combo-page .list-group-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.combo-page .remove-item {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.combo-page #totalPrice {
+    font-weight: bold;
+    color: #28a745;
+}
+
+
+
+

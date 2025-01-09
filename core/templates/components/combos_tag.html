@@ -1,0 +1,54 @@
+<!-- Início da Aba "Combos Personalizado" (só esse trecho) -->
+<div class="tab-pane fade"
+     id="combos-personalizado"
+     role="tabpanel"
+     aria-labelledby="combos-personalizado-tab">
+
+  <!-- 1) LISTA DE COMBOS SUGERIDOS -->
+  <section class="container my-3">
+    <h4>Combos Sugeridos</h4>
+    <div class="row">
+      <!-- Exemplo: Loop dos combos do banco (tipo='combos') -->
+      {% for combo in combos_sugeridos %}
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-header">
+              {{ combo.nome }}
+            </div>
+            <div class="card-body">
+              <p>Preço: R$ {{ combo.preco }}</p>
+              <!-- Descrições e etc. -->
+              <button class="btn btn-primary personalizar-combo-btn"
+                      data-combo-id="{{ combo.id }}">
+                Personalizar
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <hr/>
+
+  <!-- 2) ÁREA PARA CRIAR DO ZERO, SE DESEJAR -->
+  <section class="container my-3">
+    <button id="btn-criar-do-zero" class="btn btn-outline-dark">
+      Criar Combo do Zero
+    </button>
+  </section>
+
+  <hr/>
+
+  <!-- 3) ÁREA ONDE EXIBIMOS O COMBO ATUAL (OCULTO POR PADRÃO) -->
+  <section class="container my-3" id="combo-personalizado-edicao" style="display: none;">
+    <h4>Editar Meu Combo</h4>
+    <div id="combo-personalizado-container" class="mb-3">
+      <!-- combos_personalizados.js vai renderizar aqui -->
+    </div>
+    <button class="btn btn-secondary" id="btn-finalizar-combo">
+      Finalizar
+    </button>
+  </section>
+</div>
+<!-- Fim da Aba "Combos Personalizado" -->

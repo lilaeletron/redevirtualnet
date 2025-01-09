@@ -1,10 +1,511 @@
-<!-- main/templates/main/combos_personalizados.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
 
 {% block title %}Combos Personalizados - Rede Virtual Net{% endblock %}
 
 {% block content %}
-<h1>Combos Personalizados</h1>
-<p>Crie o combo perfeito combinando nossos serviços de internet, telefonia e TV para atender às suas necessidades específicas.</p>
-<!-- Inclua um formulário ou uma tabela com opções de combos -->
+<!-- 
+  Removendo qualquer scroll (tome cuidado com conteúdos maiores que a tela)
+  min-height: 100vh para ocupar a tela inteira e overflow: hidden para não ter scroll.
+-->
+<div class="container-fluid p-4" style="min-height: 100vh; overflow: hidden;">
+
+  <!-- Título principal -->
+  <h1 class="text-center mb-4" style="color: var(--text-color);">
+    Monte seu Combo Personalizado
+  </h1>
+  <p class="text-center" style="color: var(--text-color); opacity: 0.8;">
+    Selecione manualmente os serviços desejados ou conheça nossas sugestões pré-prontas.
+  </p>
+
+  <!-- SEÇÃO EXEMPLO: TABS DE PLANOS (ex: seus planos prontos) -->
+  <!-- (Copiando a ideia do seu trecho de código, mas adaptado) -->
+  <section class="container my-4" style="max-width: 1200px;">
+    <div class="text-center mb-3 text-animated">
+      <p class="h3 my-3 m-0" style="color: var(--text-color);">
+        Escolha o plano perfeito para você e sua família
+      </p>
+    </div>
+    <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs" role="tablist">
+      {% for tipo in tipos %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link card-header {% if forloop.first %}active{% endif %}"
+                  id="{{ tipo }}-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#{{ tipo }}"
+                  type="button"
+                  role="tab"
+                  aria-controls="{{ tipo }}"
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+            {{ tipo|capfirst }}
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      {% for tipo in tipos %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+             id="{{ tipo }}"
+             role="tabpanel"
+             aria-labelledby="{{ tipo }}-tab">
+
+          <div class="container-fluid">
+            <!-- Iniciando uma nova row -->
+            <div class="row g-5 mt-0 justify-content-evenly">
+              {% for assinatura in assinaturas|get_item:tipo %}
+                <!-- Abrir nova linha a cada 3 itens -->
+                {% if forloop.counter0|divisibleby:3 %}
+                  </div>
+                  <div class="row g-5 mt-0 justify-content-evenly">
+                {% endif %}
+
+                <!-- Cada card ocupa 1/3 da largura -->
+                <article class="card text-center col-12 col-md-3 p-0">
+                  <header class="card-header h4 text-white fw-semibold p-3 bg-primary">
+                    {{ assinatura.nome }}
+                  </header>
+                  <div class="card-body" style="color: var(--text-color); background-color: var(--background-color);">
+                    <h5 class="card-title text-success">
+                      R$ {{ assinatura.preco }}/mês
+                    </h5>
+                    <ul class="list-unstyled fw-semibold p-2 fs-6" style="min-height: 100px;">
+                      {% for descricao, link in assinatura.descricoes_links %}
+                        <li class="m-3">
+                          <a href="#" class="link-custom">
+                            {{ descricao|capfirst }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <footer class="card-footer p-3 bg-light">
+                    <!-- Exemplo: Botão "Assine Agora" ou "Criar Plano" -->
+                    <a class="p-2 assine-agora fw-bold h5"
+                       href="{% url 'assine_agora' %}"
+                       aria-label="Assine Agora">
+                      Assine Agora
+                    </a>
+                  </footer>
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  <!-- FIM TABS EXEMPLO -->
+
+  <!-- Exemplo: Uma “linha divisória” -->
+  <hr class="my-4"/>
+
+  <!-- JSON com limites (para o script) -->
+  {{ limites_por_categoria|json_script:"limitesJSON" }}
+
+  <!-- 1) Sugestões de Combo Próprias -->
+  <section class="mb-4">
+    <h3 class="text-primary">Nossas Sugestões</h3>
+    <p class="text-muted">Clique e adicione ao seu combo:</p>
+    <div class="row">
+      <!-- Ajuste para os combos que você já tenha definido no backend 
+           Exemplo usando 2 combos, adaptando nomes reais e valores -->
+      <div class="col-md-6 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-success">Combo Família (Exemplo)</h4>
+            <ul class="list-unstyled mb-3">
+              <li>- Internet 150 Mega (R$ 80.00)</li>
+              <li>- BOX 200 canais (R$ 20.00)</li>
+              <li>- Telemedicina Familiar (R$ 29.99)</li>
+            </ul>
+            <button class="btn btn-outline-primary w-100 btn-selecionar-combo"
+                    data-servicos='[
+                      {"nome": "150 Mega", "categoria": "internet", "preco": 80.0},
+                      {"nome": "BOX com mais de 200 canais", "categoria": "tv", "preco": 20.0},
+                      {"nome": "Telemedicina Familiar (Fibra)", "categoria": "telemedicina", "preco": 29.99}
+                    ]'>
+              Usar este Combo
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-success">Combo Gamer (Exemplo)</h4>
+            <ul class="list-unstyled mb-3">
+              <li>- Internet 300 Mega (R$ 100.00)</li>
+              <li>- IP Gamer (R$ 30.00)</li>
+              <li>- Chip Móvel 10GB (R$ 49.90)</li>
+            </ul>
+            <button class="btn btn-outline-primary w-100 btn-selecionar-combo"
+                    data-servicos='[
+                      {"nome": "300 Mega", "categoria": "internet", "preco": 100.0},
+                      {"nome": "IP Gamer (IP Fixo)", "categoria": "ip_gamer", "preco": 30.0},
+                      {"nome": "Chip com 10GB de Internet", "categoria": "chip_movel", "preco": 49.9}
+                    ]'>
+              Usar este Combo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) Escolha Manual (Dropdown + Botão + Resumo) -->
+  <div class="row">
+    <!-- Escolha Manual -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm" style="background-color: var(--background-color); color: var(--text-color);">
+        <div class="card-body">
+          <h4 class="card-title" style="color: var(--text-color);">
+            Escolha Manualmente
+          </h4>
+          
+          <select id="dropdown-servicos" class="form-select mb-3">
+            <option value="" data-categoria="" data-preco="0" selected>
+              -- Selecione um serviço --
+            </option>
+            {% for servico in servicos %}
+              <option value="{{ servico.nome }}"
+                      data-categoria="{{ servico.categoria }}"
+                      data-preco="{{ servico.preco }}">
+                {{ servico.nome }} ({{ servico.get_categoria_display }}) - R$ {{ servico.preco }}
+              </option>
+            {% endfor %}
+          </select>
+
+          <button id="adicionar-servico" class="btn btn-primary w-100">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumo do Combo -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm" style="background-color: var(--background-color); color: var(--text-color);">
+        <div class="card-body">
+          <h4 class="card-title" style="color: var(--text-color);">
+            Meu Combo
+          </h4>
+
+          <ul id="servicos-selecionados" class="list-unstyled mb-3">
+            <li class="text-muted" style="color: var(--text-color); opacity: 0.5;">
+              Nenhum serviço selecionado
+            </li>
+          </ul>
+
+          <!-- Valor total e desconto -->
+          <div class="mb-2">
+            <span>Desconto: </span>
+            <strong id="valor-desconto" style="color: var(--item-hover, #ff9800);">
+              R$ 0.00
+            </strong>
+          </div>
+          <h5 class="mb-3">
+            Total: 
+            <strong style="color: var(--item-hover, #ff9800);">
+              R$ <span id="total">0.00</span>
+            </strong>
+          </h5>
+
+          <div class="d-flex gap-2">
+            <button id="reset-combo" class="btn btn-outline-danger flex-grow-1">
+              Resetar
+            </button>
+            <button id="btn-criar-plano" class="btn btn-warning fw-bold flex-grow-1">
+              Criar Plano
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERGUNTAS FREQUENTES (EXPANDIDA) -->
+  <section>
+    <h3 class="mb-3 text-primary">Perguntas Frequentes</h3>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#collapseOne">
+            Por que existe um limite de serviços por categoria?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Para garantir a melhor estabilidade e evitar conflitos de planos, cada categoria possui um limite próprio.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#collapseTwo">
+            Posso alterar meu combo depois de criado?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Sim, contate nosso suporte ou refaça seu combo. Em alguns casos, pode haver cobranças adicionais.
+          </div>
+        </div>
+      </div>
+
+      <!-- Mais perguntas -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree">
+            Como funciona o desconto progressivo?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Adicionando mais serviços ou múltiplas categorias, você pode ganhar % de desconto. Cada categoria adicional pode oferecer um adicional no desconto. 
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour">
+            Posso adicionar mais de um chip móvel?
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Sim, desde que respeite o limite definido para a categoria <strong>Chip Móvel</strong>. 
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div> <!-- Fim container-fluid -->
+
+<!-- MODAL com Opção de Fechar e Assinar Plano -->
+<div class="modal fade" id="modalPlanoGerado" tabindex="-1" aria-labelledby="modalPlanoGeradoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: var(--background-color); color: var(--text-color);">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPlanoGeradoLabel">Seu Plano Personalizado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <div id="resumo-plano-gerado" class="mb-3"></div>
+        <h5 class="text-success">Vantagens do seu Plano</h5>
+        <ul>
+          <li>Suporte especializado 24h</li>
+          <li>Upgrade e downgrade simplificados</li>
+          <li>Economia garantida ao agrupar serviços</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <!-- Botão Fechar -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
+        <!-- Botão Assinar Plano -->
+        <a id="btn-assinar-plano" 
+           class="btn btn-primary fw-bold" 
+           href="{% url 'assine_agora' %}">
+          Assinar Plano
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript de Lógica -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Inicializa Modal do Bootstrap
+  const modalPlanoGerado = new bootstrap.Modal(document.getElementById('modalPlanoGerado'));
+
+  // Ler limites do JSON
+  const limitesJSON = document.getElementById("limitesJSON").textContent;
+  const LIMITES = JSON.parse(limitesJSON);
+
+  // Variáveis de controle
+  let totalBruto = 0;
+  let totalDesconto = 0;
+  let contadorPorCategoria = {};
+  let servicosSelecionados = []; // array de {nome, categoria, preco}
+
+  // Elementos
+  const dropdown = document.getElementById('dropdown-servicos');
+  const btnAdicionar = document.getElementById('adicionar-servico');
+  const btnReset = document.getElementById('reset-combo');
+  const ulSelecionados = document.getElementById('servicos-selecionados');
+  const spanTotal = document.getElementById('total');
+  const spanDesc = document.getElementById('valor-desconto');
+  const btnCriarPlano = document.getElementById('btn-criar-plano');
+  const resumoPlanoGerado = document.getElementById('resumo-plano-gerado');
+
+  // Função de atualizar a lista e valores
+  function atualizarResumo() {
+    // Limpa
+    ulSelecionados.innerHTML = "";
+    if (servicosSelecionados.length === 0) {
+      ulSelecionados.innerHTML = `
+        <li class="text-muted" style="color: var(--text-color); opacity: 0.5;">
+          Nenhum serviço selecionado
+        </li>`;
+      totalBruto = 0;
+      totalDesconto = 0;
+      spanDesc.textContent = "R$ 0.00";
+      spanTotal.textContent = "0.00";
+      return;
+    }
+
+    // Soma tudo
+    totalBruto = servicosSelecionados.reduce((acc, s) => acc + s.preco, 0);
+    
+    // Exemplo de desconto simples: 5% se tiver >= 3 serviços
+    totalDesconto = 0;
+    if (servicosSelecionados.length >= 3) {
+      totalDesconto = totalBruto * 0.05;
+    }
+
+    const totalFinal = totalBruto - totalDesconto;
+    spanDesc.textContent = "R$ " + totalDesconto.toFixed(2);
+    spanTotal.textContent = totalFinal.toFixed(2);
+
+    // Renderizar <li>
+    servicosSelecionados.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.classList.add("mb-2", "d-flex", "justify-content-between", "align-items-center");
+      li.dataset.index = index;
+
+      li.innerHTML = `
+        <div>
+          <strong>${item.nome}</strong>
+          <span class="ms-2 badge bg-secondary">${item.categoria}</span>
+          <span class="ms-2">- R$ ${item.preco.toFixed(2)}</span>
+        </div>
+        <button class="btn btn-sm btn-outline-danger">Remover</button>
+      `;
+
+      li.querySelector('button').addEventListener('click', () => {
+        removerItem(index);
+      });
+
+      ulSelecionados.appendChild(li);
+    });
+  }
+
+  // Remover item pelo índice
+  function removerItem(idx) {
+    const item = servicosSelecionados[idx];
+    if (item) {
+      contadorPorCategoria[item.categoria]--;
+      if (contadorPorCategoria[item.categoria] < 0) {
+        contadorPorCategoria[item.categoria] = 0;
+      }
+      servicosSelecionados.splice(idx, 1);
+    }
+    atualizarResumo();
+  }
+
+  // Botão Adicionar
+  btnAdicionar.addEventListener('click', () => {
+    const opt = dropdown.options[dropdown.selectedIndex];
+    const nome = opt.value;
+    if (!nome) {
+      alert("Selecione um serviço válido.");
+      return;
+    }
+    const categoria = opt.getAttribute('data-categoria');
+    const preco = parseFloat(opt.getAttribute('data-preco')) || 0;
+
+    // Verifica limite
+    const limiteCat = LIMITES[categoria] !== undefined ? LIMITES[categoria] : 9999;
+    if (!contadorPorCategoria[categoria]) {
+      contadorPorCategoria[categoria] = 0;
+    }
+    if (contadorPorCategoria[categoria] >= limiteCat) {
+      alert(`Você já atingiu o limite para "${categoria}".`);
+      return;
+    }
+
+    // Adiciona
+    servicosSelecionados.push({nome, categoria, preco});
+    contadorPorCategoria[categoria]++;
+    dropdown.value = "";
+    atualizarResumo();
+  });
+
+  // Botão Reset
+  btnReset.addEventListener('click', () => {
+    servicosSelecionados = [];
+    contadorPorCategoria = {};
+    atualizarResumo();
+  });
+
+  // Selecionar combos sugeridos
+  document.querySelectorAll('.btn-selecionar-combo').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const data = btn.getAttribute('data-servicos');
+      const comboServicos = JSON.parse(data);
+
+      comboServicos.forEach(item => {
+        const cat = item.categoria;
+        const lim = LIMITES[cat] !== undefined ? LIMITES[cat] : 9999;
+        if (!contadorPorCategoria[cat]) {
+          contadorPorCategoria[cat] = 0;
+        }
+        if (contadorPorCategoria[cat] < lim) {
+          servicosSelecionados.push(item);
+          contadorPorCategoria[cat]++;
+        }
+      });
+
+      atualizarResumo();
+    });
+  });
+
+  // Botão "Criar Plano" => Abre modal com resumo
+  btnCriarPlano.addEventListener('click', () => {
+    if (servicosSelecionados.length === 0) {
+      alert("Nenhum serviço selecionado!");
+      return;
+    }
+
+    // Monta HTML
+    const totalFinal = parseFloat(spanTotal.textContent);
+    const desconto = parseFloat(spanDesc.textContent.replace("R$","")) || 0;
+    
+    let html = "<h6>Seu Combo Selecionado:</h6><ul>";
+    servicosSelecionados.forEach(s => {
+      html += `<li>${s.nome} - R$ ${s.preco.toFixed(2)}</li>`;
+    });
+    html += `</ul>
+      <p><strong>Desconto aplicado:</strong> R$ ${desconto.toFixed(2)}</p>
+      <p><strong>Total Final:</strong> R$ ${totalFinal.toFixed(2)}</p>`;
+
+    resumoPlanoGerado.innerHTML = html;
+
+    modalPlanoGerado.show();
+  });
+
+  // Inicial
+  atualizarResumo();
+});
+</script>
 {% endblock %}

@@ -6,9 +6,12 @@
 {% block content %}
 <h1>Assine Agora</h1>
 <p>Escolha o plano que melhor se adapta às suas necessidades e comece a desfrutar dos nossos serviços de internet de alta qualidade.</p>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-warning">Assinar Agora</button>
-</form>
+
+<!-- Lista de Planos Disponíveis -->
+<h2>Planos Disponíveis</h2>
+<ul>
+    {% for plano in planos %}
+        <li>{{ plano.nome }} - {{ plano.get_tipo_display }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
