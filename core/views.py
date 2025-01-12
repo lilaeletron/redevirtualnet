@@ -6,6 +6,7 @@ from .forms import ReclamacaoForm, AssinaturaClienteForm  # Você precisará cri
 from tools.load_image import ImageCarousel
 from core.models import Assinatura, Servico, CategoriaLimite
 import logging
+from django.core import serializers
 
 # Páginas Estáticas
 logger = logging.getLogger(__name__)
@@ -23,6 +24,7 @@ class IndexView(TemplateView):
         context['carousel_is_active'] = 2
         context['tipos'] = Assinatura.tipos_unicos_ativos()
         context['assinaturas'] = Assinatura.assinaturas_por_tipo()
+        context['servicos'] = Servico.objects.filter(ativo=True).order_by('categoria', 'preco')
 
         # Log para depuração (remover em produção)
         logger.info("Tipos únicos ativos: %s", context['tipos'])
@@ -63,6 +65,7 @@ class CombosPersonalizadosView(TemplateView):
 
         # Todos os serviços ativos
         context['servicos'] = Servico.objects.filter(ativo=True).order_by('categoria', 'preco')
+        context['combos'] = Assinatura.objects.filter(ativo=True, tipo='combos').order_by('ordem', 'preco')
 
         # Limites de cada categoria (vamos montar em um dicionário)
         limites_db = CategoriaLimite.objects.all()  # ex.: [CategoriaLimite(categoria="internet", limite=2), ...]
@@ -72,6 +75,8 @@ class CombosPersonalizadosView(TemplateView):
 
         # Passar esse dict para o template
         context['limites_por_categoria'] = limites_dict
+
+        context['servicos_test'] = serializers.serialize('json', context['servicos'])
 
         return context
 

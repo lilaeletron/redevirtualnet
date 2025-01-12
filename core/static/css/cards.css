@@ -25,6 +25,14 @@ article.card:hover {
     box-shadow: 0px 0px 20px var(--item-hover), 0px 0px 20px var(--item-hover) inset;
 }
 
+
+.border-cyan {
+    border: 2px solid cyan;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px cyan, 0px 0px 20px cyan inset;
+}
+
+
 .text-animated {
     background: linear-gradient(90deg, #ff8a00, #e52e71, #00c6ff);
     background-size: 200%;

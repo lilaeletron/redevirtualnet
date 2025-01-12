@@ -76,6 +76,12 @@ header {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+.header-custom {
+    background: var(--background-header);
+    color: #ffffff;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
 /* Divisor Vertical (vr-divider) usado para separar elementos no header */
 .vr-divider {
     background-color: var(--bs-secondary);
