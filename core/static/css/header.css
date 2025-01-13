@@ -206,3 +206,9 @@ header {
   color: var(--text-color) !important;
   /* Ajuste conforme o tema */
 }
+
+.divider {
+    display: block;
+    width: 100%;
+    height: auto;
+}

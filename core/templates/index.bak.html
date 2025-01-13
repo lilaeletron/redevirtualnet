@@ -1,0 +1,155 @@
+<!-- main/templates/main/index.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Início - Rede Virtual Net{% endblock %}
+{% block content %}
+    <section id="carousel-section">
+        <div id="id-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for item in carousel_images %}
+                    <button
+                            type="button"
+                            data-bs-target="#id-carousel"
+                            data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="{% if forloop.counter0 == carousel_is_active %} active {% endif %}"
+                            aria-current="{% if forloop.counter0 == carousel_is_active %} true {% endif %}"
+                            aria-label="Slide {{ forloop.counter0 }}">
+                    </button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for item in carousel_images %}
+                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %} active {% endif %}">
+                        <img src="{% static 'img/' %}{{ item }}" class="d-block w-100 h-100"
+                             alt="Imagem {{ forloop.counter }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <section class="container my-4">
+        <div class="text-center mb-3 text-animated">
+            <p class="h3 my-3 m-0">Escolha o plano perfeito para você e sua família.</p>
+        </div>
+        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs" role="tablist">
+            {% for tipo in tipos %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link card-header {% if forloop.first %}active{% endif %}"
+                            id="{{ tipo }}-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#{{ tipo }}"
+                            type="button"
+                            role="tab"
+                            aria-controls="{{ tipo }}"
+                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                        {{ tipo|capfirst }}
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            {% for tipo in tipos %}
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tipo }}" role="tabpanel"
+                     aria-labelledby="{{ tipo }}-tab">
+                    {% if tipo == 'combos' %}
+                        {% include 'components/combos_tag.html' with lista_assinaturas=assinaturas|get_item:tipo %}
+                    {% else %}
+                        <div class="container-fluid">
+                            <!-- Iniciando uma nova row -->
+                            <div class="row g-5 mt-0 justify-content-evenly">
+                                {% for assinatura in assinaturas|get_item:tipo %}
+                                    <!-- Abrir nova linha a cada 3 itens -->
+                                    {% if forloop.counter0|divisibleby:3 %}
+                                        </div>
+                                        <div class="row g-5 mt-0 justify-content-evenly">
+                                    {% endif %}
+
+                                    <!-- Cada card ocupa 1/3 da largura -->
+                                    <article class="card text-center col-12 col-md-3 p-0">
+                                        <header class="card-header h4 text-white fw-semibold p-3">
+                                            {{ assinatura.nome }}
+                                        </header>
+                                        <div class="card-body">
+                                            <h5 class="card-title text-success">R$ {{ assinatura.preco }}/mês</h5>
+                                            <ul class="list-unstyled fw-semibold p-2 fs-6">
+                                                {% for descricao, link in assinatura.descricoes_links %}
+                                                    <li class="m-3">
+                                                        <a href="#" class="link-custom">
+                                                            {{ descricao|capfirst }}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <footer class="card-footer p-3">
+                                            <a class="p-2 assine-agora fw-bold h5" href="{% url 'assine_agora' %}"
+                                               aria-label="Assine Agora">
+                                                Assine Agora
+                                            </a>
+                                        </footer>
+                                    </article>
+                                {% endfor %}
+                                </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+<!-- Estrutura inicial com as seções planejadas -->
+
+<section id="internet-fibra border" class="py-5 bg-light">
+    <div class="container">
+        <div class="hero bg-primary text-white py-5 mb-4">
+            <div class="text-center">
+                <h1 class="display-4">Internet Fibra Óptica</h1>
+                <p class="lead">Conexão rápida, estável e ideal para toda a família.</p>
+                <a href="#" class="btn btn-light btn-lg">Saiba Mais</a>
+            </div>
+        </div>
+        <p class="text-center fs-5">
+            Descubra a velocidade e estabilidade da nossa Internet Fibra, com planos para todos os perfis.
+        </p>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="bi bi-lightning fs-1 text-success"></i>
+                <h5 class="mt-3">Alta Velocidade</h5>
+                <p>Internet com velocidades de até 1 Gbps.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-shield-check fs-1 text-info"></i>
+                <h5 class="mt-3">Conexão Estável</h5>
+                <p>Navegação sem interrupções, mesmo nos momentos de maior uso.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-house-door fs-1 text-warning"></i>
+                <h5 class="mt-3">Para Toda a Família</h5>
+                <p>Planos que atendem às necessidades de todos em casa.</p>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-primary btn-lg">Conheça os Planos</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
+
+
+

@@ -20,7 +20,7 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         # Atualiza o contexto com as variáveis necessárias
-        context['carousel_images'] = ImageCarousel('.\core\static\img').get_images()
+        context['carousel_images'] = ImageCarousel('.\core\static\img\carrossel').get_images()
         context['carousel_is_active'] = 2
         context['tipos'] = Assinatura.tipos_unicos_ativos()
         context['assinaturas'] = Assinatura.assinaturas_por_tipo()

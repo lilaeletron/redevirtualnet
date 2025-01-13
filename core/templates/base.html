@@ -26,6 +26,10 @@
 <!-- Hero-Section -->
     <link rel="stylesheet" href="{% static 'css/cards.css' %}">
 
+
+<!-- No <head> -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -54,6 +58,17 @@
 <script src="{% static 'js/toggle-theme.js' %}"></script>
 {#<script src="{% static 'js/chat.js' %}"></script>#}
 <script src="{% static 'js/combos_personalizados.js' %}"></script>
+
+
+<!-- Antes do fechamento de </body> -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // duração da animação em milissegundos
+    once: false,     // animação ocorre apenas uma vez
+        mirror: true
+  });
+</script>
 
 </body>
 
