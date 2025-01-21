@@ -1,0 +1,47 @@
+Arquivo: .\chat_engine.py
+Resumo:
+ O arquivo "chat_engine.py" estabelece uma conexão com um servidor hospedado no endereço IP "45.229.53.169:11434" usando a biblioteca 'ollama'. Após estabelecer a conexão, ele itera sobre a lista de modelos disponíveis no servidor e imprime cada um deles na saída padrão.
+
+   Funções definidas: Nenhuma função é explicitamente definida neste arquivo.
+   Funções chamadas: ollama.Client(), client.list().
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: ['print']
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\load_image.py
+Resumo:
+ O arquivo .\load_image.py define uma classe chamada "ImageCarousel" que lista e retorna imagens com extensões válidas ('.png', '.jpg', '.jpeg', '.webp') de um diretório especificado. A classe possui funções: __init__ para inicialização, _list_images para listar as imagens válidas no diretório e get_images para retornar essa lista. Em seguida, o código cria uma instância de ImageCarousel com um diretório específico e imprime cada nome de arquivo de imagem na lista.
+
+Cadeia de Funções:
+- Funções Definidas: ['__init__', '_list_images', 'get_images']
+- Funções Chamadas: ['ImageCarousel', 'print']
+- Funções Não Usadas: ['__init__', '_list_images', 'get_images']
+================================================================================
+Arquivo: .\resumo_projeto.py
+Resumo:
+ Este é um script Python que realiza várias funções para analisar projetos de código localizados em um diretório específico. Ele escaneia o diretório, identifica arquivos relevantes com base em uma lista pré-definida de extensões de arquivo (como .py, .js, .cpp, etc.), e então realiza as seguintes operações para cada arquivo:
+
+1. **Leitura**: Lê o conteúdo do arquivo.
+2. **Resumo da Função**: Usa um modelo Ollama (que deve ser fornecido ou usar um padrão) para gerar um resumo do que cada função no código faz. Este resumo é gerado através de interações com o servidor Ollama, que pode estar hospedado em um local especificado.
+3. **Análise de Funções (Para .py)**: Se o arquivo for um arquivo Python, o script realiza uma análise adicional das funções definidas no código. Isso inclui identificar quais funções são definidas, quais funções são chamadas e quais funções não estão sendo utilizadas.
+4. **Saída**: Os resumos gerados para cada arquivo, juntamente com qualquer análise de funções, são escritos em um arquivo de texto na mesma pasta do diretório base.
+
+Cadeia de Funções:
+- Funções Definidas: ['escanear_diretorio', 'gerar_resumo_ollama', 'analisar_funcoes_codigo', 'processar_arquivos', 'principal']
+- Funções Chamadas: ['print', 'processar_arquivos', 'analisar_funcoes_codigo', 'input', 'isinstance', 'list', 'escanear_diretorio', 'open', 'gerar_resumo_ollama', 'set', 'principal', 'Client']
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\shell-01.py
+Resumo:
+ O arquivo .\shell-01.py cria seis objetos de assinatura para diferentes planos de internet usando o Django ORM (Object-Relational Mapping). Cada objeto representa um plano específico com detalhes como tipo, nome, ordem, descrições, preço e status ativo. Os planos criados são: Plano Básico, Plano Intermediário, Plano Avançado, Plano Premium, Plano Top e Plano Gamer.
+
+   Funções definidas no Django ORM utilizadas:
+   - Assinatura.objects.create()
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================

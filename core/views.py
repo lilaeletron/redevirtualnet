@@ -139,7 +139,7 @@ class AreaClienteView(LoginRequiredMixin, TemplateView):
 
 
 class AssineAgoraView(TemplateView):
-    template_name = 'main/assine_agora.html'
+    template_name = 'assine_agora.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
