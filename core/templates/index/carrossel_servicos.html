@@ -1,0 +1,39 @@
+{% load static %}
+{% load custom_filters %}
+<div id="{{ carousel_id }}" class="carousel slide servicos-div-default border-cyan p-2 m-1" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for img in carousel_items %}
+            <button type="button"
+                    data-bs-target="#{{ carousel_id }}"
+                    data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.counter0 == carousel_int_is_active %} active {% endif %}"
+                    aria-current="{% if forloop.counter0 == carousel_int_is_active %} true {% endif %}"
+                    aria-label="Slide {{ forloop.counter0 }}">
+            </button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        {% for img in carousel_items %}
+            <div class="carousel-item position-relative w-100 h-100 {% if forloop.counter0 == carousel_int_is_active %} active {% endif %}">
+                <img src="{% static img_base_path %}{{ img }}"
+                     class="img-fluid"
+                     alt="{{ img | remove_extension }}">
+                <div class="carousel-caption">
+                    <h5 class="text-white">{{ img | remove_extension }}</h5>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ carousel_id }}"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ carousel_id }}"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+

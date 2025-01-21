@@ -2,11 +2,12 @@
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import ReclamacaoForm, AssinaturaClienteForm  # Você precisará criar esses formulários
+from .forms import ReclamacaoForm  # Você precisará criar esses formulários
 from tools.load_image import ImageCarousel
-from core.models import Assinatura, Servico, CategoriaLimite
+from core.models import Assinatura, Servico, CategoriaLimite, Modal
 import logging
 from django.core import serializers
+from datetime import datetime
 
 # Páginas Estáticas
 logger = logging.getLogger(__name__)
@@ -16,20 +17,38 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
-        # Obtém o contexto padrão da superclasse
-        context = super().get_context_data(**kwargs)
 
-        # Atualiza o contexto com as variáveis necessárias
+        context = super().get_context_data(**kwargs)
+        context['modals'] = Modal.objects.all()
+
+
+        context['text_animated'] = 'text-animated' if True else ''
+        context['year'] = datetime.now().year
+
+
+        # ---
         context['carousel_images'] = ImageCarousel('.\core\static\img\carrossel').get_images()
         context['carousel_is_active'] = 2
+
+        # ---
+        context['carousel_internet'] = ImageCarousel('.\core\static\img\servicos\internet').get_images()
+        context['carousel_int_is_active'] = 2
+
+        # ---
+        context['carousel_telefonia'] = ImageCarousel('.\core\static\img\servicos\movel').get_images()
+        context['carousel_tel_is_active'] = 0
+
+        # ---
+        context['carousel_telemedicina'] = ImageCarousel('.\core\static\img\servicos\medicina').get_images()
+        context['carousel_med_is_active'] = 0
+
+        # ---
         context['tipos'] = Assinatura.tipos_unicos_ativos()
         context['assinaturas'] = Assinatura.assinaturas_por_tipo()
+
         context['servicos'] = Servico.objects.filter(ativo=True).order_by('categoria', 'preco')
 
-        # Log para depuração (remover em produção)
-        logger.info("Tipos únicos ativos: %s", context['tipos'])
-        logger.info("Assinaturas por tipo: %s", context['assinaturas'])
-
+        # --- Log para depuração (remover em produção)
         return context
 
 
@@ -43,6 +62,11 @@ class MissaoVisaoValoresView(TemplateView):
 
 class InternetFibraView(TemplateView):
     template_name = 'internet_fibra.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assinaturas_fibra'] = Assinatura.objects.filter(tipo='internet')
+        return context
 
 
 class TelefoniaView(TemplateView):

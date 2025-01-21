@@ -25,6 +25,7 @@ class ImageCarousel:
         return self.images
 
 
+
 if __name__ == '__main__':
     carousel = ImageCarousel('.\core\static\img')
     for img in carousel.get_images():

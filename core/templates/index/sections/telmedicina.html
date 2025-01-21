@@ -1,0 +1,51 @@
+{% load static %}
+{% load custom_filters %}
+<section id="telmedicina" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
+        <div class="row rounded p-3 align-items-center">
+            <div class="col-md-6 mt-1" data-aos="fade-right" data-aos-delay="150">
+                <h2 class="{{ text_animated }} text-center my-2">Conecte-se com a saúde na palma da sua
+                    mão!</h2>
+                <p class="text-center mb-4 fs-6">Com nossa solução de telemedicina, você tem acesso rápido e
+                    seguro a serviços
+                    de saúde onde estiver. Consultas online, agendamento prático e suporte especializado em
+                    apenas alguns cliques.</p>
+                <h5 class="fw-semibold text-center mb-2">Aproveite os benefícios da telemedicina:</h5>
+                <ul class="text-center list-unstyled ps-3 mb-4 fs-6">
+                    <li>✔️ Consultas médicas online de forma rápida e segura</li>
+                    <li>✔️ Acesso a médicos especialistas 24/7</li>
+                    <li>✔️ Agendamento prático e sem complicações</li>
+                    <li>✔️ Redução de custos com deslocamento e tempo</li>
+                </ul>
+                <div class="p-2">
+                    <p class="lead text-center">Cuide da sua saúde com a comodidade que você merece.</p>
+                    <div class="d-flex justify-content-around flex-wrap mt-1">
+                        <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in"
+                             data-aos-delay="200">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-medicina/seguranca.jpg' %}"
+                                 alt="Segurança Médica" width="82" height="82" loading="lazy">
+                        </div>
+                        <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in"
+                             data-aos-delay="300">
+                            <img class="img-fluid"
+                                 src="{% static 'img/servicos/app-medicina/equipamento.jpg' %}"
+                                 alt="Agendamento Fácil" width="82" height="82" loading="lazy">
+                        </div>
+                        <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in"
+                             data-aos-delay="400">
+                            <img class="img-fluid"
+                                 src="{% static 'img/servicos/app-medicina/medicina movel.jpg' %}"
+                                 alt="Suporte Médico" width="82" height="82" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                {% include "index/carrossel_servicos.html" with carousel_id="id-telemedicina" carousel_items=carousel_telemedicina carousel_active_index=carousel_med_is_active img_base_path="img/servicos/medicina/" %}
+            </div>
+        </div>
+    </div>
+</section>

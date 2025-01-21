@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row g-5 mt-0 justify-content-evenly">
+    <div class="row g-4 mt-0 justify-content-evenly">
         {% for assinatura in lista_assinaturas %}
             <article class="card text-center col-12 col-md-3 p-0">
                 <header class="card-header h4 text-white fw-semibold p-3">
@@ -7,12 +7,14 @@
                 </header>
                 <div class="card-body">
                     <h5 class="card-title text-success">
-                        Apartir de R$ {{ assinatura.preco }}/mês
+                        A partir de R$ {{ assinatura.preco }}/mês
                     </h5>
                     <ul class="list-unstyled fw-semibold p-2 fs-6">
                         {% for descricao, link in assinatura.descricoes_links %}
-                            <li class="m-3">
-                                <a href="#" class="link-custom">{{ descricao }}</a>
+                            <li class="m-1">
+                                <button class="link-custom btn btn-link fw-semibold"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#{{ link }}">{{ descricao }}</button>
                             </li>
                         {% endfor %}
                     </ul>
@@ -30,6 +32,3 @@
         {% endfor %}
     </div>
 </div>
-
-
-

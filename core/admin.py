@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Reclamacao, Assinatura, AssinaturaCliente, Servico, CategoriaLimite
+from .models import Reclamacao, Assinatura, AssinaturaCliente, Servico, CategoriaLimite, Modal
 
 
 class AssinaturaAdmin(admin.ModelAdmin):
@@ -72,6 +72,28 @@ class ServicoAdmin(admin.ModelAdmin):
     list_editable = ('ativo',)
 
 
+class ModalAdmin(admin.ModelAdmin):
+    # Campos exibidos na lista de registros
+    list_display = ('id_modal', 'title', 'updated_at', 'created_at')
+    list_filter = ('updated_at', 'created_at')  # Filtros laterais
+    search_fields = ('id_modal', 'title', 'body')  # Campos pesquisáveis
+    ordering = ('id_modal',)  # Ordenação padrão por `id_modal`
+
+    # Configuração para o formulário detalhado
+    fieldsets = (
+        ('Informações Gerais', {
+            'fields': ('id_modal', 'title', 'body'),
+        }),
+        ('Histórico', {
+            'fields': ('created_at', 'updated_at'),
+            'description': 'Informações sobre a criação e última atualização do registro.',
+        }),
+    )
+
+    readonly_fields = ('created_at', 'updated_at')  # Campos somente leitura
+
+
+
 @admin.register(CategoriaLimite)
 class CategoriaLimiteAdmin(admin.ModelAdmin):
     list_display = ('categoria', 'limite')
@@ -80,6 +102,7 @@ class CategoriaLimiteAdmin(admin.ModelAdmin):
 admin.site.register(AssinaturaCliente, AssinaturaClienteAdmin)
 admin.site.register(Assinatura, AssinaturaAdmin)
 admin.site.register(Servico, ServicoAdmin)
+admin.site.register(Modal, ModalAdmin)
 
 # Register your models here.
 admin.site.register(Reclamacao)

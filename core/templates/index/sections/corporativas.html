@@ -1,0 +1,56 @@
+{% load static %}
+{% load custom_filters %}
+<section id="corporativas" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="container p-1">
+        <h2 class="text-center fw-bold mb-4 {{ text_animated }}">Soluções Corporativas</h2>
+        <p class="text-center fs-5 mb-4">Oferecemos serviços completos para empresas que buscam internet
+            robusta, telefonia
+            de qualidade e conectividade avançada.</p>
+        <div class="row text-center">
+            <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{% static 'img/servicos/corporativo/fibra.jpg' %}" alt="Internet Dedicada"
+                         class="m-1 border-cyan"
+                         width="300" loading="lazy">
+                    <h5 class="mt-3 fw-bold {{ text_animated }}">Internet Dedicada</h5>
+                    <p class="fs-6">Conexão de alta velocidade e estabilidade para garantir produtividade máxima
+                        e velocidade.</p>
+                    <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{% static 'img/servicos/corporativo/fixo.jpg' %}" alt="IP Fixo"
+                         class="m-1 border-cyan"
+                         width="300" loading="lazy">
+                    <h5 class="mt-3 fw-bold {{ text_animated }}">IP Fixo Corporativo</h5>
+                    <p class="fs-6">Maior segurança e controle na rede, facilitando acesso remoto e serviços
+                        internos.</p>
+                    <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{% static 'img/servicos/corporativo/pabx.jpg' %}" alt="PABX"
+                         class="m-1 border-cyan"
+                         width="300" height="300" loading="lazy">
+                    <h5 class="mt-3 fw-bold {{ text_animated }}">PABX</h5>
+                    <p class="fs-6">Centralize e gerencie suas ligações telefônicas com soluções modernas de
+                        comunicação.</p>
+                    <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="{% static 'img/servicos/corporativo/sip.jpg' %}" alt="SIP" class="m-1 border-cyan"
+                         width="300"
+                         loading="lazy">
+                    <h5 class="mt-3 fw-bold {{ text_animated }}">SIP</h5>
+                    <p class="fs-6">Protocolo de voz sobre IP para chamadas mais econômicas e integrações
+                        avançadas.</p>
+                    <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,52 @@
+{% load static %}
+{% load custom_filters %}
+<section id="tv-assinatura" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
+        <div class="row p-1">
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="150">
+                <div class="m-1">
+                    <h2 class="{{ text_animated }} text-center my-4">TV por Assinatura com Conteúdo
+                        Completo</h2>
+                    <h5 class="fw-semibold text-center">Nossos pacotes de TV por assinatura oferecem:</h5>
+                    <ul class="list-unstyled ps-3 mb-4">
+                        <li class="mb-2 text-center">✔️ Uma ampla variedade de canais para todos os gostos</li>
+                        <li class="mb-2 text-center">✔️ Recursos interativos, como gravação de programas e
+                            replay
+                        </li>
+                        <li class="mb-2 text-center">✔️ Inclusão de plataformas de streaming (Netflix, Amazon
+                            Prime Video)
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-3 mt-5">
+                    <h2 class="{{ text_animated }} text-center">App de Streaming Virtual Net</h2>
+                    <p class="lead text-center">Viva uma experiência completa de entretenimento com a Virtual
+                        Net.</p>
+                    <div class="d-flex justify-content-around flex-wrap mt-3">
+                        <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="200">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-stream/max.avif' %}"
+                                 alt="App Max" loading="lazy">
+                        </div>
+                        <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="300">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-stream/paramont+.avif' %}"
+                                 alt="App Paramount+" loading="lazy">
+                        </div>
+                        <div class="btn p-0 m-1 d-flex flex-column align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="400">
+                            <img class="img-fluid p-0" src="{% static 'img/servicos/app-stream/watchtv.avif' %}"
+                                 alt="App Watch TV" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center" data-aos="fade-left"
+                 data-aos-delay="200">
+                <img src="{% static 'img/servicos/app-stream/virtual-net-app.jpg' %}"
+                     alt="Família assistindo TV"
+                     class="img-fluid p-3 m-1 border-cyan" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>

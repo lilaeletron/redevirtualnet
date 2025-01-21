@@ -1,28 +1,54 @@
-/*#chat-toggle svg {*/
-/*    transition: transform 0.3s ease;*/
-/*    color: var(--item-hover); !* Define a cor do ícone *!*/
-/*}*/
-
-/*#chat-toggle:hover svg {*/
-/*    transform: scale(1.1); !* Aumenta o ícone ao passar o mouse *!*/
-/*    color: var(--background-header); !* Altera a cor ao passar o mouse *!*/
-/*}*/
-
-.chat-button{
-    fill: #0d47a1;
+.advanced-footer {
+  overflow: hidden;
 }
 
+/* Fundo de partículas (caso utilize Particles.js ou similar) */
+#particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+}
 
-/*.carousel {*/
-/*    width: 100%;*/
-/*    height: 50vh; !* Altura será 20% da altura da tela *!*/
-/*    overflow: hidden;*/
-/*}*/
+/* Garantir que o conteúdo do footer fique acima do fundo */
+.advanced-footer > .container {
+  position: relative;
+  z-index: 2;
+}
 
-/*.carousel-item img {*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*}*/
+/* Links de navegação */
+.advanced-footer a.text-white:hover {
+  text-decoration: underline;
+}
 
+/* Feedback animado para newsletter */
+.form-feedback {
+  animation: fadeInOut 3s ease;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
+/* Feed de atualizações */
+.social-feed .feed-item {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.social-feed .feed-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+/* Botão Voltar ao Topo */
+#back-to-top-btn {
+  z-index: 9999;
+  transition: transform 0.3s;
+}
+#back-to-top-btn:hover {
+  transform: scale(1.1);
+}

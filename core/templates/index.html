@@ -1,58 +1,52 @@
+{# base.html já deve conter os <head>, scripts, cabeçalhos e rodapés essenciais #}
 {% extends 'base.html' %}
 {% load static %}
 {% load custom_filters %}
-{% block title %}Início - Rede Virtual Net{% endblock %}
-{% block content %}
 
-    <section id="carousel-section">
+{% block title %}Início - Rede Virtual Net{% endblock %}
+
+{% block content %}
+    {# CARROSSEL PRINCIPAL #}
+    <section id="carousel-section" class="pb-1" data-aos="fade-up" data-aos-delay="100">
         <div id="id-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 {% for item in carousel_images %}
-                    <button
-                            type="button"
-                            data-bs-target="#id-carousel"
-                            data-bs-slide-to="{{ forloop.counter0 }}"
-                            class="{% if forloop.counter0 == carousel_is_active %} active {% endif %}"
-                            aria-current="{% if forloop.counter0 == carousel_is_active %} true {% endif %}"
+                    <button type="button" data-bs-target="#id-carousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="{% if forloop.counter0 == carousel_is_active %}active{% endif %}"
+                            aria-current="{% if forloop.counter0 == carousel_is_active %}true{% endif %}"
                             aria-label="Slide {{ forloop.counter0 }}">
                     </button>
                 {% endfor %}
             </div>
             <div class="carousel-inner">
                 {% for item in carousel_images %}
-                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %} active {% endif %}">
+                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %}active{% endif %}">
                         <img src="{% static 'img/carrossel/' %}{{ item }}" class="d-block w-100 h-100"
-                             alt="Imagem {{ forloop.counter }}">
+                             alt="Carrossel {{ forloop.counter }}"
+                             loading="lazy" data-aos="zoom-in" data-aos-delay="100">
                     </div>
                 {% endfor %}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Anterior</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span><span
+                    class="visually-hidden">Próximo</span>
             </button>
         </div>
     </section>
 
-    <section class="container my-4" data-aos="zoom-in">
-        <div class="text-center mb-3 text-animated">
-            <p class="h3 my-3 m-0">Escolha o plano perfeito para você e sua família.</p>
-        </div>
-        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs" role="tablist">
+    {# SEÇÃO DE PLANOS #}
+    <section class="container py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="my-3 text-center {{ text_animated }}">Escolha o plano perfeito para você e sua família.</h2>
+        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs"
+            role="tablist">
             {% for tipo in tipos %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link card-header {% if forloop.first %}active{% endif %}"
-                            id="{{ tipo }}-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#{{ tipo }}"
-                            type="button"
-                            role="tab"
-                            aria-controls="{{ tipo }}"
+                            id="{{ tipo }}-tab" data-bs-toggle="tab" data-bs-target="#{{ tipo }}" type="button"
+                            role="tab" aria-controls="{{ tipo }}"
                             aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
                         {{ tipo|capfirst }}
                     </button>
@@ -61,31 +55,29 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             {% for tipo in tipos %}
-                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tipo }}" role="tabpanel"
-                     aria-labelledby="{{ tipo }}-tab">
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tipo }}"
+                     role="tabpanel" aria-labelledby="{{ tipo }}-tab">
                     {% if tipo == 'combos' %}
-                        {% include 'components/combos_tag.html' with lista_assinaturas=assinaturas|get_item:tipo %}
+                        {% include 'index/combos_tag.html' with lista_assinaturas=assinaturas|get_item:tipo %}
                     {% else %}
                         <div class="container-fluid">
                             <div class="row g-5 mt-0 justify-content-evenly">
                                 {% for assinatura in assinaturas|get_item:tipo %}
                                     {% if forloop.counter0|divisibleby:3 %}
                                         </div>
-                                        <div class="row g-5 mt-0 justify-content-evenly">
+                                        <div class="row g-4 mt-0 justify-content-evenly">
                                     {% endif %}
-
-                                    <article class="card text-center col-12 col-md-3 p-0">
-                                        <header class="card-header h4 text-white fw-semibold p-3">
-                                            {{ assinatura.nome }}
-                                        </header>
+                                    <article class="card text-center col-12 col-md-3 p-0" data-aos="fade-up"
+                                             data-aos-delay="150">
+                                        <header class="card-header h4 text-white fw-semibold p-3">{{ assinatura.nome }}</header>
                                         <div class="card-body">
                                             <h5 class="card-title text-success">R$ {{ assinatura.preco }}/mês</h5>
                                             <ul class="list-unstyled fw-semibold p-2 fs-6">
                                                 {% for descricao, link in assinatura.descricoes_links %}
-                                                    <li class="m-3">
-                                                        <a href="{{ link }}" class="link-custom">
-                                                            {{ descricao|capfirst }}
-                                                        </a>
+                                                    <li class="m-1">
+                                                        <button class="link-custom btn btn-link fw-semibold"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#{{ link }}">{{ descricao }}</button>
                                                     </li>
                                                 {% endfor %}
                                             </ul>
@@ -105,251 +97,145 @@
             {% endfor %}
         </div>
     </section>
-    
-    <section id="internet-fibra" class="py-5" data-aos="slide-up">
+
+    {# SEÇÃO SOBRE NÓS #}
+    <section id="sobre-nos" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
         <div class="container">
-            <div class="row rounded p-3 align-items-center">
-                
-                
-                
-                
-                <div class="col-md-8" data-aos="slide-up">
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                    aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
-                                    aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{% static 'img/servicos/internet_fibra_2.jpg' %}" class="d-flex w-100 h-100"
-                                     alt="Pessoa trabalhando em home office com internet fibra">
-                                <div class="carousel-caption">
-                                    <h5>Wi-Fi ultra rápido em todos os cômodos</h5>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'img/servicos/internet_fibra_3.jpg' %}" class="img-fluid w-100 h-100"
-                                     alt="Jovem jogando online com internet fibra">
-                                <div class="carousel-caption">
-                                    <h5>Conexão estável para videoconferências sem interrupções</h5>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'img/servicos/internet_fibra_4.jpg' %}" class="d-flex w-100 h-100"
-                                     alt="Família feliz assistindo filme em streaming com internet fibra">
-                                <div class="carousel-caption">
-                                    <h5>Downloads em segundos com a fibra óptica</h5>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'img/servicos/internet_fibra_1.jpg' %}" class="d-flex w-100 h-100"
-                                     alt="Família feliz assistindo filme em streaming com internet fibra">
-                                <div class="carousel-caption">
-                                    <h5>Downloads em segundos com a fibra óptica</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                                data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                                data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-                
-                
-                
-                <div class="col-md-4 mt-3" data-aos="slide-up">
-                    <h2 class="text-animated text-center">Sua internet voando com a fibra óptica!</h2>
-                    <p class="text-center mb-5">
-                        Experimente a internet mais rápida da região com nossa fibra óptica de última geração. Navegue,
-                        jogue online e faça streaming sem interrupções.
-                    </p>
-                    <h2 class="fw-semibold mt-4 mb-2 text-animated text-center">Aproveite os benefícios da fibra
-                        óptica</h2>
-                    <ul class="text-center list-unstyled">
-                        <li>Velocidade e estabilidade superiores</li>
-                        <li>Maior segurança para seus dados</li>
-                        <li>Ideal para jogos online, streaming e home office</li>
-                        <li>Planos com diferentes velocidades para atender às suas necessidades</li>
-                        <li>Suporte técnico 24 horas por dia, 7 dias por semana</li>
-                    </ul>
-                    <div class="text-center">
-                        <a href="{% url 'internet_fibra' %}" class="btn assine-agora mt-1 p-2 fw-bold">Assine já!</a>
-                    </div>
-                </div>
-                
-                
-                
-                
-                
+            <div class="text-center mb-4">
+                <h2 class="fw-bold {{ text_animated }}">Conheça nossa empresa e nossos serviços</h2>
+                <p class="lead">
+                    Na Virtual Net, somos comprometidos em oferecer soluções de conectividade de ponta, telefonia,
+                    TV por assinatura e muito mais. Com anos de experiência no mercado, nossa missão é fornecer
+                    serviços confiáveis e suporte excepcional para você e sua família ou negócio.
+                </p>
+                <p class="lead">Descubra como podemos transformar sua experiência digital!</p>
             </div>
         </div>
     </section>
 
-    
-    
-    
+    {# SEÇÃO TV E INTERNET EM FIBRA #}
+    {% include 'index/sections/tv-internet-fibra.html' %}
 
+    {# SEÇÃO TV POR ASSINATURA #}
+    {% include 'index/sections/tv-assinatura.html' %}
 
+    {# SEÇÃO TELEFONIA #}
+    {% include 'index/sections/telefonia.html' %}
 
+    {# SEÇÃO TELMEDICINA #}
+    {% include 'index/sections/telmedicina.html' %}
 
+    {# SEÇÃO SOLUÇÕES CORPORATIVAS #}
+    {% include 'index/sections/corporativas.html' %}
 
-
-
-    <section id="telefone-ofertas" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2 class="text-success">Telefonia com Vantagens Exclusivas</h2>
-                    <p>Com nossos planos de telefonia, você fala mais e paga menos. Aproveite:</p>
-                    <ul>
-                        <li>Planos de telefonia fixa e móvel com minutos ilimitados</li>
-                        <li>Ofertas especiais para ligações internacionais e roaming</li>
-                        <li>Serviços adicionais como identificador de chamadas e caixa postal</li>
-                    </ul>
-                    <p>Fale mais, pague menos e tenha a melhor qualidade de chamadas com a Virtual Net.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="{% static 'img/pessoas_conversando.jpg' %}" alt="Pessoas conversando ao telefone"
-                         class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="chips-moveis" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{% static 'img/smartphone_moderno.jpg' %}"
-                         alt="Smartphone moderno com chip da Virtual Net" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <h2 class="text-danger">Chips Móveis com Internet 4G/5G</h2>
-                    <p>Navegue com a velocidade que você precisa e aproveite nossos planos de chip móvel com internet
-                        4G/5G.</p>
-                    <p>Escolha o plano ideal para você:</p>
-                    <ul>
-                        <li>Planos pré-pago com bônus de internet e ligações</li>
-                        <li>Planos pós-pago com franquia de internet, minutos e SMS</li>
-                        <li>Cobertura e qualidade de sinal em todo o país</li>
-                    </ul>
-                    <a href="#" class="btn btn-danger">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="tv-assinatura" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2 class="text-warning">TV por Assinatura com Conteúdo Completo</h2>
-                    <p>Assista aos seus canais favoritos com a melhor qualidade de imagem e som.</p>
-                    <p>Nossos pacotes de TV por assinatura oferecem:</p>
-                    <ul>
-                        <li>Variedade de canais para todos os gostos</li>
-                        <li>Recursos interativos como gravação de programas e replay TV</li>
-                        <li>Plataformas de streaming inclusas (Netflix, Amazon Prime Video)</li>
-                    </ul>
-                    <p>Tenha uma experiência completa de entretenimento com a Virtual Net.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="{% static 'img/familia_assistindo_tv.jpg' %}" alt="Família assistindo TV"
-                         class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="app-streaming" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <h2 class="text-info">App de Streaming Virtual Net</h2>
-            <p>Assista a filmes, séries e programas de TV a qualquer hora e em qualquer lugar com nosso app de
-                streaming.</p>
-            <p>Recursos do app:</p>
-            <ul>
-                <li>Download de conteúdo offline</li>
-                <li>Personalização de perfis</li>
-                <li>Interface intuitiva e fácil de usar</li>
-            </ul>
-            <p>Baixe agora e aproveite o melhor do entretenimento online.</p>
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="{% static 'img/app_streaming_celular.jpg' %}" alt="App de streaming no celular"
-                         class="img-fluid">
-                </div>
-                <div class="col-md-4">
-                    <img src="{% static 'img/app_streaming_tablet.jpg' %}" alt="App de streaming no tablet"
-                         class="img-fluid">
-                </div>
-                <div class="col-md-4">
-                    <img src="{% static 'img/app_streaming_tv.jpg' %}" alt="App de streaming na TV" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="atendimento-empresas" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2 class="text-dark">Soluções Completas para sua Empresa</h2>
-                    <p>A Virtual Net oferece soluções de internet, telefonia e TI para empresas de todos os portes.</p>
-                    <p>Nossos serviços para empresas:</p>
-                    <ul>
-                        <li>Internet dedicada com alta velocidade e estabilidade</li>
-                        <li>Soluções de telefonia corporativa com PABX IP e linhas digitais</li>
-                        <li>Link de dados para conectar filiais e escritórios remotos</li>
-                        <li>Suporte técnico especializado 24 horas por dia</li>
-                    </ul>
-                    <p>Aumente a produtividade da sua empresa com a Virtual Net.</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="{% static 'img/escritorio_moderno.jpg' %}"
-                         alt="Escritório moderno com soluções Virtual Net" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="sobre-cliente" class="py-5" data-aos="fade-up">
-        <div class="container border">
-            <h2 class="text-center text-primary">Nossa Prioridade é Você</h2>
-            <p class="text-center fs-5 mb-4">
-                Na VirtualNet, cada cliente é único. Estamos comprometidos em oferecer soluções personalizadas,
-                atendimento excepcional e serviços que realmente fazem a diferença no seu dia a dia.
-            </p>
+    {# SEÇÃO SOBRE O CLIENTE #}
+    <section id="sobre-cliente" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container p-4">
+            <h2 class="text-center fw-bold mb-4 {{ text_animated }}">Nossa Prioridade é Você</h2>
+            <p class="text-center fs-5 mb-4">Na VirtualNet, cada cliente é único. Oferecemos soluções
+                personalizadas,
+                atendimento excepcional e serviços que realmente fazem a diferença no seu dia a dia.</p>
             <div class="row text-center">
-                <div class="col-md-4" data-aos="zoom-in">
-                    <i class="bi bi-headset fs-1 text-success"></i>
-                    <h5 class="mt-3">Suporte 24/7</h5>
-                    <p>Estamos sempre prontos para atender suas dúvidas e resolver problemas.</p>
-                </div>
                 <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="bi bi-award fs-1 text-warning"></i>
-                    <h5 class="mt-3">Qualidade Garantida</h5>
-                    <p>Nossos serviços são projetados para oferecer a melhor experiência.</p>
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/atendente.jpg' %}" alt="Atendente"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Suporte 24/7</h5>
+                        <p class="fs-6">Sempre prontos para suas dúvidas e resolução de problemas.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Fale Conosco</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/qualidade.jpg' %}" alt="Qualidade"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Qualidade Garantida</h5>
+                        <p class="fs-6">Serviços projetados para oferecer a melhor experiência.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
                 </div>
                 <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
-                    <i class="bi bi-people fs-1 text-info"></i>
-                    <h5 class="mt-3">Relacionamento Próximo</h5>
-                    <p>Valorizamos cada cliente, criando conexões reais e duradouras.</p>
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/relacionamento.jpg' %}" alt="Relacionamento"
+                             class="m-1 border-cyan"
+                             width="380" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Relacionamento Próximo</h5>
+                        <p class="fs-6">Valorizamos cada cliente, criando conexões reais e duradouras.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Conheça a VirtualNet</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    {# SEÇÃO LOCALIZAÇÃO #}
+    <section class="py-5 my-5" id="localizacao" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row mb-1">
+                <div class="col-12 text-center">
+                    <h2 class="fw-bold {{ text_animated }}">Onde Estamos</h2>
+                    <h6>Visite nossas unidades, será um prazer recebê-lo!</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Matriz (Matrix)</h4>
+                    <p class="text-center fs-6">
+                        Estrada do Jathay, 330<br>
+                        Vila Nossa Sra. Aparecida, Carapicuíba - SP, 06390-180<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1828.8758529196143!2d-46.85271593034627!3d-23.541431198675852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf01b17bfaa94b%3A0x79f8f6cd65ac19be!2sRede%20Virtual%20Net%20-%20Fibra%20%C3%B3ptica!5e0!3m2!1spt-BR!2sus!4v1737057705454!5m2!1spt-BR!2sus"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Loja Lambari</h4>
+                    <p class="text-center fs-6">
+                        Rua Tiradentes, 122<br>
+                        Lambari - MG, 37480-000<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3699.9678336125876!2d-45.350577423612016!3d-21.974197579922407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cb19a672063273%3A0x7ab66b8ff6cfc9b2!2sR.%20Tiradentes%2C%20122%2C%20Lambari%20-%20MG%2C%2037480-000!5e0!3m2!1spt-BR!2sbr!4v1737057991070!5m2!1spt-BR!2sbr"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Loja Jesuânia</h4>
+                    <p class="text-center fs-6">
+                        Rua Luiz Alves da Silva, 92B<br>
+                        Jesuânia - MG, 37485-000<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924.8401170893276!2d-45.29089933034837!3d-21.997495098744075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cb3d5aaef8ada1%3A0x98defbbe2acef2ea!2sR.%20Lu%C3%ADs%20Alves%20da%20Silva%2C%2072%20-%20Jesuania%2C%20Jesu%C3%A2nia%20-%20MG%2C%2037485-000!5e0!3m2!1spt-BR!2sbr!4v1737058325473!5m2!1spt-BR!2sbr"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {# Incluindo os modais dinâmicos #}
+    {% for modal in modals %}
+        {% include 'index/modal.html' with id=modal.id_modal title=modal.title body=modal.body %}
+    {% endfor %}
+
 {% endblock %}
+
+
+

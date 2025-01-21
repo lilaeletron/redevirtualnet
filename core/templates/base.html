@@ -23,12 +23,13 @@
     <!-- Hero-Section -->
     <link rel="stylesheet" href="{% static 'css/hero-section.css' %}">
 
-<!-- Hero-Section -->
+    <!-- Hero-Section -->
     <link rel="stylesheet" href="{% static 'css/cards.css' %}">
 
+    <link rel="stylesheet" href="{% static 'css/servicos.css' %}">
 
-<!-- No <head> -->
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- No <head> -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 </head>
 
@@ -46,10 +47,10 @@
 <!-- Chat Desktop -->
 {#{% include 'components/chat_widget.html' %}#}
 
+<div class="">
+    {% include 'components/footer.html' %}
+</div>
 
-
-
-{% include 'components/footer.html' %}
 
 <!-- Bootstrap Js-->
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -60,16 +61,17 @@
 <script src="{% static 'js/combos_personalizados.js' %}"></script>
 
 
+<script src="{% static 'js/scroll-snap.js' %}"></script>
+
+
 <!-- Antes do fechamento de </body> -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-  AOS.init({
-    duration: 1000, // duração da animação em milissegundos
-    once: false,     // animação ocorre apenas uma vez
-        mirror: true
-  });
+    AOS.init({
+        duration: 300, // duração da animação em milissegundos
+        once: false,     // animação ocorre apenas uma vez
+        mirror: false
+    });
 </script>
-
 </body>
-
 </html>

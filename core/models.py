@@ -1,4 +1,5 @@
 # main/models.py
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -12,6 +13,18 @@ class Reclamacao(models.Model):
         return f'Reclamação de {self.nome}'
 
 
+class Modal(models.Model):
+    id_modal = models.CharField(max_length=50,
+                                unique=True)  # Identificador único (será usado como "id" do modal no HTML)
+    title = models.CharField(max_length=200)  # Título do modal
+    body = models.TextField()  # Conteúdo HTML/CSS do modal
+    created_at = models.DateTimeField(auto_now_add=True)  # Data de criação (opcional)
+    updated_at = models.DateTimeField(auto_now=True)  # Data de última edição (opcional)
+
+    def __str__(self):
+        return self.title  # Mostra o título ao referenciar o objeto no admin do Django
+
+
 class Assinatura(models.Model):
     # Choices para os tipos de assinatura
     TIPO_CHOICES = [
@@ -19,22 +32,14 @@ class Assinatura(models.Model):
         ('internet', 'Planos de Internet'),
         ('tv', 'TV por Assinatura'),
         ('streaming', 'Pacote de Streamings'),
-        ('controle', 'Plano Controle'),
+        ('telefonia', 'Telefonia'),
         ('movel', 'Internet Móvel'),
         ('telemedicina', 'Telemedicina'),
         ('upgrades', 'Upgrades'),
     ]
 
     # Choices para os links predefinidos
-    PAGINA_CHOICES = [
-        ('wifi_turbo', 'Wi-Fi Turbo'),
-        ('telemedicina', 'Telemedicina'),
-        ('planos_internet', 'Planos de Internet'),
-        ('tv_assinatura', 'TV por Assinatura'),
-        ('streaming', 'Pacote de Streamings'),
-        ('controle', 'Plano Controle'),
-        ('nenhum', 'Nenhum Link'),  # Para quando não houver link associado
-    ]
+    PAGINA_CHOICES = [(modal.id_modal, modal.title) for modal in Modal.objects.all()]
 
     # Campos gerais
     tipo = models.CharField(max_length=50, choices=TIPO_CHOICES, default='combos')
@@ -44,25 +49,25 @@ class Assinatura(models.Model):
 
     # Descrições e links associados
     descricao1 = models.CharField(max_length=100, null=True, blank=True)  # Agora é CharField
-    link1 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link1 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao2 = models.CharField(max_length=100, null=True, blank=True)
-    link2 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link2 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao3 = models.CharField(max_length=100, null=True, blank=True)
-    link3 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link3 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao4 = models.CharField(max_length=100, null=True, blank=True)
-    link4 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link4 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao5 = models.CharField(max_length=100, null=True, blank=True)
-    link5 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link5 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao6 = models.CharField(max_length=100, null=True, blank=True)
-    link6 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link6 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao7 = models.CharField(max_length=100, null=True, blank=True)
-    link7 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link7 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao8 = models.CharField(max_length=100, null=True, blank=True)
-    link8 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link8 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao9 = models.CharField(max_length=100, null=True, blank=True)
-    link9 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link9 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
     descricao10 = models.CharField(max_length=100, null=True, blank=True)
-    link10 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='nenhum')
+    link10 = models.CharField(max_length=50, choices=PAGINA_CHOICES, default='🚧 Nenhum')
 
     # Controle de ativação e histórico
     ativo = models.BooleanField(default=True)
@@ -120,16 +125,18 @@ class Assinatura(models.Model):
         ordem_personalizada = [
             'combos',
             'internet',
+            'telefonia',
+            'movel',
             'tv',
             'streaming',
             'controle',
-            'movel',
             'telemedicina',
             'upgrades',
         ]
 
-        return sorted(tipos_disponiveis, key=lambda tipo: ordem_personalizada.index(tipo) if tipo in ordem_personalizada else len(ordem_personalizada))
-
+        return sorted(tipos_disponiveis,
+                      key=lambda tipo: ordem_personalizada.index(tipo) if tipo in ordem_personalizada else len(
+                          ordem_personalizada))
 
     @classmethod
     def assinaturas_por_tipo(cls):

@@ -1,0 +1,146 @@
+[DIRETÓRIO] core
+  └── admin.py
+  └── apps.py
+  └── forms.py
+  └── models.py
+  └── tests.py
+  └── urls.py
+  └── views.py
+  └── __init__.py
+[DIRETÓRIO] core\migrations
+  └── 0001_initial.py
+  └── 0002_alter_assinatura_plano.py
+  └── 0003_plano.py
+  └── 0004_rename_plano_servico_combo.py
+  └── 0005_delete_combo_delete_servico.py
+  └── 0006_combo.py
+  └── 0007_remove_combo_nome.py
+  └── 0008_assinaturacliente_delete_combo_and_more.py
+  └── 0009_alter_assinatura_descricao1_and_more.py
+  └── 0010_assinatura_preco.py
+  └── 0011_servico.py
+  └── 0012_alter_servico_options_servico_destaque_and_more.py
+  └── 0013_categorialimite.py
+  └── 0014_alter_servico_categoria.py
+  └── 0015_modal_alter_assinatura_link1_alter_assinatura_link10_and_more.py
+  └── 0016_alter_assinatura_link1_alter_assinatura_link10_and_more.py
+  └── __init__.py
+[DIRETÓRIO] core\static
+[DIRETÓRIO] core\static\css
+  └── cards.css
+  └── chat.css
+  └── header.css
+  └── hero-section.css
+  └── servicos.css
+[DIRETÓRIO] core\static\img
+[DIRETÓRIO] core\static\img\atendimento
+  └── atendente.jpg
+  └── Gemini_Generated_Image_30b98b30b98b30b9.jpg
+  └── Gemini_Generated_Image_qeud9eqeud9eqeud.jpg
+  └── qualidade.jpg
+  └── relacionamento.jpg
+[DIRETÓRIO] core\static\img\carrossel
+  └── canais.png
+  └── combos.png
+  └── indique.png
+  └── telemedicina.png
+  └── volta_as_aulas.jpeg
+[DIRETÓRIO] core\static\img\servicos
+[DIRETÓRIO] core\static\img\servicos\app-fibra
+  └── gamer-2.jpg
+  └── seguranca.jpg
+  └── velocidade-1.jpg
+  └── velocidade-2.jpg
+[DIRETÓRIO] core\static\img\servicos\app-medicina
+  └── equipamento.jpg
+  └── medicina movel.jpg
+  └── seguranca.jpg
+[DIRETÓRIO] core\static\img\servicos\app-movel
+  └── celular-app.jpg
+  └── celular.jpg
+  └── rgu7_yski_230118.jpg
+  └── telefone.jpg
+[DIRETÓRIO] core\static\img\servicos\app-stream
+  └── max.avif
+  └── paramont+.avif
+  └── virtual-net-app.jpg
+  └── watchtv.avif
+[DIRETÓRIO] core\static\img\servicos\corporativo
+  └── fibra.jpg
+  └── fixo.jpg
+  └── pabx.jpg
+  └── sip.jpg
+[DIRETÓRIO] core\static\img\servicos\internet
+  └── Conecte-se ao futuro com a Virtual Net, trazendo experiências imersivas com nossa internet de alta velocidade..jpg
+  └── Conexões estáveis para videoconferências sem interrupções com a Virtual Net..jpg
+  └── Equipe dedicada e infraestrutura robusta para garantir a qualidade e a estabilidade da nossa rede..jpg
+  └── Experimente alta performance e velocidade com a rede de última geração da Virtual Net..jpg
+  └── Gerencie e monitore sua conexão com a Virtual Net através de uma interface intuitiva e moderna..jpg
+  └── Trabalhe remotamente com a confiabilidade da Virtual Net para videoconferências e produtividade..jpg
+[DIRETÓRIO] core\static\img\servicos\medicina
+  └── Acessibilidade em Áreas Rurais.jpg
+  └── Conexão Direta com Especialistas.jpg
+  └── Cuidados médicos acessíveis, onde quer que você esteja..jpg
+  └── Monitoramento em Tempo Real.jpg
+  └── Planeje consultas médicas com facilidade e rapidez..jpg
+  └── Telemedicina para Famílias.jpg
+[DIRETÓRIO] core\static\img\servicos\movel
+  └── Conecte-se de onde estiver. VirtualNet oferece cobertura até nos lugares mais remotos..jpg
+  └── Conexões que aproximam você de quem importa. VirtualNet comunicação com qualidade e confiança..jpg
+  └── Conexões que unem gerações. VirtualNet facilitando a comunicação para todos, com qualidade e carinho..jpg
+  └── Distâncias não são barreiras. VirtualNet aproxima quem importa, com qualidade em chamadas interurbanas..jpg
+  └── Estudo e inovação conectados. VirtualNet apoia suas conquistas com serviços de alta qualidade..jpg
+  └── Momentos compartilhados. VirtualNet conecta você e seus amigos, onde quer que estejam..jpg
+  └── Produtividade e conexão. VirtualNet garante serviços confiáveis para acompanhar você em todas as suas tarefas..jpg
+[DIRETÓRIO] core\static\js
+  └── chat.js
+  └── combos_personalizados.js
+  └── scroll-snap.js
+  └── theme-init.js
+  └── toggle-theme.js
+[DIRETÓRIO] core\static\svg
+  └── sprite.svg
+[DIRETÓRIO] core\static\vendor
+[DIRETÓRIO] core\static\vendor\bootstrap
+[DIRETÓRIO] core\static\vendor\bootstrap\css
+  └── bootstrap.min.css
+[DIRETÓRIO] core\static\vendor\bootstrap\js
+  └── bootstrap.bundle.min.js
+[DIRETÓRIO] core\templates
+  └── area_cliente.html
+  └── assine_agora.html
+  └── base.html
+  └── combos_personalizados.html
+  └── faq.html
+  └── index.bak.html
+  └── index.html
+  └── internet_fibra.html
+  └── missao_visao_valores.html
+  └── quem_somos.html
+  └── reclamacoes.html
+  └── simulador_planos.html
+  └── suporte_tecnico.html
+  └── telefonia.html
+  └── telemedicina.html
+  └── teste_velocidade.html
+  └── tv_streaming.html
+[DIRETÓRIO] core\templates\components
+  └── chat_widget.html
+  └── footer.html
+  └── header-desktop.html
+  └── header-mobile.html
+  └── social-icons.html
+  └── toggle-theme.html
+[DIRETÓRIO] core\templates\index
+  └── carrossel_servicos.html
+  └── combos_tag.html
+  └── modal.html
+[DIRETÓRIO] core\templates\index\sections
+  └── corporativas.html
+  └── telefonia.html
+  └── telmedicina.html
+  └── tv-assinatura.html
+  └── tv-internet-fibra.html
+[DIRETÓRIO] core\templatetags
+  └── custom_filters.py
+  └── __init__.py

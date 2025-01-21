@@ -1,0 +1,23 @@
+{# includes/modal.html #}
+<div class="modal fade" id="{{ id }}" tabindex="-1" aria-labelledby="{{ id }}Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-top">
+        <div class="modal-content header-custom">
+            <div class="modal-header">
+                <h5 class="modal-title {{ text_animated }}" id="{{ id }}Label">{{ title }}</h5>
+                <button type="button" class="btn-close assine-agora" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ body|safe }}
+            </div>
+            {% if id ==  "sva_escolha" %}
+                <div class="card-footer p-3 text-center">
+                    <a class="p-2 assine-agora  fw-bold h6" href="{% url 'combos_personalizados' %}"
+                       aria-label="Assine Agora">
+                        Personalize Seu Combo
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

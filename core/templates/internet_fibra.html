@@ -1,10 +1,154 @@
-<!-- main/templates/main/internet_fibra.html -->
 {% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
 
-{% block title %}Internet Fibra Óptica - Rede Virtual Net{% endblock %}
+{% block title %}Internet Fibra - Rede Virtual Net{% endblock %}
 
 {% block content %}
-<h1>Internet Fibra Óptica</h1>
-<p>Oferecemos planos de internet fibra óptica com velocidades de até 1 Gbps, garantindo uma conexão estável e rápida para sua casa ou empresa.</p>
-<!-- Detalhe os planos e benefícios -->
+    {# SEÇÃO PRINCIPAL DOS PLANOS #}
+    <section id="internet-fibra" class="container py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-center fw-bold my-4 {{ text_animated }}">Planos de Internet em Fibra Óptica</h2>
+        <p class="text-center lead mb-5">Conexão de alta velocidade, estável e perfeita para você e sua família. Escolha
+            o plano que mais se adequa às suas necessidades e comece agora mesmo!</p>
+
+        <div class="row g-4">
+            {% for plano in assinaturas_fibra %}
+                <article class="card text-center col-12 col-md-4 p-0" data-aos="fade-up" data-aos-delay="150">
+                    <header class="card-header h4 bg-primary text-white fw-semibold p-3">{{ plano.nome }}</header>
+                    <div class="card-body">
+                        <h5 class="card-title text-success mb-3">R$ {{ plano.preco }}/mês</h5>
+                        <ul class="list-unstyled fw-semibold fs-6 mb-3">
+                            <li>Conexão 100% fibra óptica</li>
+                            <li>Wi-Fi Dual Band incluso</li>
+                            <li>Suporte técnico 24/7</li>
+                        </ul>
+                    </div>
+                    <footer class="card-footer p-3">
+                        <a class="btn btn-lg btn-success assine-agora" href="{% url 'assine_agora' %}"
+                           aria-label="Assine agora {{ plano.nome }}">
+                            Assine Agora
+                        </a>
+                    </footer>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# SEÇÃO SOBRE O CLIENTE #}
+    <section id="sobre-cliente" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container p-4">
+            <h2 class="text-center fw-bold mb-4 {{ text_animated }}">Nossa Prioridade é Você</h2>
+            <p class="text-center fs-5 mb-4">Na VirtualNet, cada cliente é único. Oferecemos soluções personalizadas,
+                atendimento excepcional e serviços que realmente fazem a diferença no seu dia a dia.</p>
+            <div class="row text-center">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/atendente.jpg' %}" alt="Atendente"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Suporte 24/7</h5>
+                        <p class="fs-6">Sempre prontos para suas dúvidas e resolução de problemas.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Fale Conosco</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/qualidade.jpg' %}" alt="Qualidade"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Qualidade Garantida</h5>
+                        <p class="fs-6">Serviços projetados para oferecer a melhor experiência.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/relacionamento.jpg' %}" alt="Relacionamento"
+                             class="m-1 border-cyan"
+                             width="380" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Relacionamento Próximo</h5>
+                        <p class="fs-6">Valorizamos cada cliente, criando conexões reais e duradouras.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Conheça a VirtualNet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# SEÇÃO LOCALIZAÇÃO #}
+    <section class="py-5 my-5" id="localizacao" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row mb-1">
+                <div class="col-12 text-center">
+                    <h2 class="fw-bold {{ text_animated }}">Onde Estamos</h2>
+                    <h6>Visite nossas unidades, será um prazer recebê-lo!</h6>
+                </div>
+            </div>
+            <div class="row">
+                {% for unidade in unidades %}
+                    <div class="col-md-4 mb-5">
+                        <h4 class="fw-bold text-center {{ text_animated }}">{{ unidade.nome }}</h4>
+                        <p class="text-center fs-6">
+                            {{ unidade.endereco|linebreaksbr }}<br>
+                            <strong>Telefone:</strong> {{ unidade.telefone }}<br>
+                            <strong>Horários:</strong> {{ unidade.horarios }}
+                        </p>
+                        <div class="ratio ratio-16x9 border-cyan">
+                            <iframe src="{{ unidade.mapa_url }}"
+                                    style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Botão que abre o modal -->
+    {#<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#wifiTurboModal">#}
+    {#  Saiba mais sobre WiFiTurbo#}
+    {#</button>#}
+
+    <h5 class="h5"> test
+        <a href="#" class="link-custom" data-bs-toggle="modal" data-bs-target="#wifiTurboModal">test</a>
+    </h5>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="wifiTurboModal" tabindex="-1" aria-labelledby="wifiTurboModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content header-custom">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wifiTurboModalLabel">WiFiTurbo - Internet Rápida e Estável</h5>
+                    <button type="button" class="btn-close assine-agora" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    O <strong>WiFiTurbo</strong> é a solução ideal para melhorar a velocidade da sua internet e aumentar
+                    a estabilidade da conexão.
+                    Ideal para casas, escritórios e gamers que buscam desempenho superior na navegação e streaming.
+                    <ul>
+                        <li>✅ Melhor alcance de sinal.</li>
+                        <li>✅ Configuração rápida e simples.</li>
+                        <li>✅ Compatível com todos os provedores de internet.</li>
+                    </ul>
+                    Experimente o melhor da tecnologia WiFi!
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

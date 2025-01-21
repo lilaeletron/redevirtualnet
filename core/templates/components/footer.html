@@ -1,32 +1,142 @@
-<footer class="bg-dark text-white py-4">
-    <div class="container">
-        <div class="row">
-            <!-- Sobre Nós -->
-            <div class="col-md-4">
-                <h5>Sobre Nós</h5>
-                <p>A VirtualNet é líder em conectividade e soluções tecnológicas.</p>
-            </div>
+{% block footer %}
+    <footer class="pt-5 pb-4 text-white header-custom" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
 
-            <!-- Links Úteis -->
-            <div class="col-md-4">
-                <h5>Links Úteis</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/quem_somos/" class="text-white text-decoration-none">Sobre Nós</a></li>
-                    <li><a href="/internet_fibra/" class="text-white text-decoration-none">Planos de Internet</a></li>
-                    <li><a href="/suporte_tecnico/" class="text-white text-decoration-none">Suporte Técnico</a></li>
-                </ul>
-            </div>
+            <!-- Linha Superior do Footer -->
+            <div class="row justify-content-between">
 
-            <!-- Redes Sociais -->
-            <div class="col-md-4">
-                <h5>Redes Sociais</h5>
-                <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <div class="text-center mt-3">
-            <small>&copy; 2025 VirtualNet. Todos os direitos reservados.</small>
-        </div>
-    </div>
-</footer>
+                <!-- Coluna: Logo e Breve Descrição -->
+                <div class="col-md-3 mb-4">
+                    <!-- Logo da Empresa (opcional) -->
+                    <a class="navbar-brand d-inline-flex align-items-center" href="{% url 'index' %}"
+                       aria-label="Página inicial">
+                        <!-- Exemplo de uso de SVG sprite -->
+                        <svg width="100%" height="50" role="img" aria-labelledby="logo-title">
+                            <title id="logo-title">Rede Virtual Net</title>
+                            <use href="/static/svg/sprite.svg#rede-virtual-net"></use>
+                        </svg>
+                    </a>
+                    <p class="mt-2 small">
+                        Sua conexão confiável com internet fibra, TV, telefonia e muito mais.
+                        Fale conosco para encontrar o plano perfeito para você!
+                    </p>
+                </div>
+
+                <!-- Coluna: Links Úteis (Exemplo de seções) -->
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Planos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'internet_fibra' %}" class="text-white text-decoration-none">Internet
+                            Fibra</a></li>
+                        <li><a href="{% url 'telefonia' %}" class="text-white text-decoration-none">Telefonia</a></li>
+                        <li><a href="{% url 'telemedicina' %}" class="text-white text-decoration-none">Telemedicina</a>
+                        </li>
+                        <li><a href="{% url 'tv_streaming' %}" class="text-white text-decoration-none">TV &amp;
+                            Streaming</a></li>
+                        <li><a href="{% url 'combos_personalizados' %}"
+                               class="text-white text-decoration-none">Combos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna: Suporte e Ferramentas -->
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'faq' %}" class="text-white text-decoration-none">FAQ</a></li>
+                        <li><a href="{% url 'suporte_tecnico' %}" class="text-white text-decoration-none">Suporte
+                            Técnico</a></li>
+                        <li><a href="{% url 'reclamacoes' %}" class="text-white text-decoration-none">Reclamações</a>
+                        </li>
+                    </ul>
+                    <h5 class="fw-bold mt-4">Ferramentas</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'simulador_planos' %}" class="text-white text-decoration-none">Simulador</a>
+                        </li>
+                        <li><a href="{% url 'teste_velocidade' %}" class="text-white text-decoration-none">Teste de
+                            Velocidade</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna: Institucional -->
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Institucional</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'quem_somos' %}" class="text-white text-decoration-none">Quem Somos</a></li>
+                        <li><a href="{% url 'missao_visao_valores' %}" class="text-white text-decoration-none">
+                            Missão, Visão e Valores
+                        </a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna: Newsletter -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold mb-3">Receba Nossas Novidades</h5>
+                    <p class="small">Fique por dentro das promoções, novos planos e serviços exclusivos.</p>
+                    <form action="#" method="post" class="d-flex flex-column flex-sm-row gap-2">
+                        {% csrf_token %}
+                        <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="Seu e-mail"
+                                aria-label="Digite seu e-mail"
+                                required
+                        />
+                        <button type="submit" class="btn btn-warning fw-bold">
+                            Inscrever
+                        </button>
+                    </form>
+                </div>
+            </div><!-- Fim da row -->
+
+            <hr class="border border-secondary border-1 opacity-75">
+
+            <!-- Linha Inferior do Footer: Redes Sociais e Links Legais -->
+            <div class="row align-items-center justify-content-between">
+
+                <!-- Coluna: Redes Sociais -->
+                <div class="col-md-4 mb-3 mb-md-0 d-flex align-items-center">
+                    <!-- Ou você pode incluir o seu componente de social-icons.html -->
+                    <span class="me-2">Siga-nos:</span>
+                    <div class="desktop-social-icons">
+                        <!-- Exemplo de uso do sprite para Facebook -->
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                            <svg class="icon" width="24" height="24" aria-hidden="true">
+                                <use href="/static/svg/sprite.svg#facebook"></use>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                            <svg class="icon" width="24" height="24" aria-hidden="true">
+                                <use href="/static/svg/sprite.svg#instagram"></use>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                            <svg class="icon" width="24" height="24" aria-hidden="true">
+                                <use href="/static/svg/sprite.svg#twitter"></use>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                            <svg class="icon" width="24" height="24" aria-hidden="true">
+                                <use href="/static/svg/sprite.svg#youtube"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna: Links Legais (Termos, Política de Privacidade, etc.) -->
+                <div class="col-md-4 mb-3 mb-md-0 text-center">
+                    <a href="#" class="text-white text-decoration-none mx-2 small">Termos de Uso</a>
+                    <a href="#" class="text-white text-decoration-none mx-2 small">Política de Privacidade</a>
+                    <a href="#" class="text-white text-decoration-none mx-2 small">Política de Cookies</a>
+                </div>
+
+                <!-- Coluna: Copyright -->
+                <div class="col-md-4 text-center text-md-end small">
+                    &copy; {{ year|default:"2025" }} Rede Virtual Net. Todos os direitos reservados.
+                </div>
+            </div><!-- Fim da row -->
+
+        </div><!-- Fim do container -->
+    </footer>
+{% endblock %}

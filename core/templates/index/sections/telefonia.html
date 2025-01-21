@@ -1,0 +1,49 @@
+{% load static %}
+{% load custom_filters %}
+<section id="telefonia" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
+        <div class="row rounded p-3 align-items-center">
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="150">
+                {% include "index/carrossel_servicos.html" with carousel_id="id-telefonia" carousel_items=carousel_telefonia carousel_active_index=carousel_tel_is_active img_base_path="img/servicos/movel/" %}
+            </div>
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                <h2 class="{{ text_animated }} text-center my-3">Conecte-se com a melhor telefonia e chip
+                    móvel!</h2>
+                <p class="text-center mb-4 fs-6">Descubra planos de telefonia com excelente cobertura e tarifas
+                    competitivas.
+                    Fale à vontade com quem você ama, aproveitando chamadas ilimitadas para todo o país e
+                    roaming nacional sem
+                    custos adicionais.</p>
+                <h5 class="fw-semibold text-center mb-1">Aproveite as vantagens dos nossos serviços:</h5>
+                <ul class="text-center list-unstyled ps-3 mb-4 fs-6">
+                    <li>✔️ Chamadas ilimitadas para todo o país</li>
+                    <li>✔️ Planos pré e pós-pagos que cabem no seu bolso</li>
+                    <li>✔️ Roaming nacional sem custos adicionais</li>
+                    <li>✔️ Pacotes de dados móveis de até 20 GB</li>
+                    <li>✔️ Atendimento ao cliente 24/7</li>
+                </ul>
+                <div class="p-1">
+                    <div class="d-flex justify-content-around flex-wrap mt-1">
+                        <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="250">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-movel/telefone.jpg' %}"
+                                 alt="Telefonia Nacional" width="82" height="82" loading="lazy">
+                        </div>
+                        <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="300">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-movel/celular-app.jpg' %}"
+                                 alt="Chip Móvel"
+                                 width="82" height="82" loading="lazy">
+                        </div>
+                        <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                             data-aos="zoom-in" data-aos-delay="350">
+                            <img class="img-fluid" src="{% static 'img/servicos/app-movel/celular.jpg' %}"
+                                 alt="Roaming Nacional"
+                                 width="82" height="82" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

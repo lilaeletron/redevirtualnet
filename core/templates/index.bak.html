@@ -1,57 +1,52 @@
-<!-- main/templates/main/index.html -->
+{# base.html já deve conter os <head>, scripts, cabeçalhos e rodapés essenciais #}
 {% extends 'base.html' %}
 {% load static %}
 {% load custom_filters %}
+
 {% block title %}Início - Rede Virtual Net{% endblock %}
+
 {% block content %}
-    <section id="carousel-section">
+    {# CARROSSEL PRINCIPAL #}
+    <section id="carousel-section" class="pb-1" data-aos="fade-up" data-aos-delay="100">
         <div id="id-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 {% for item in carousel_images %}
-                    <button
-                            type="button"
-                            data-bs-target="#id-carousel"
-                            data-bs-slide-to="{{ forloop.counter0 }}"
-                            class="{% if forloop.counter0 == carousel_is_active %} active {% endif %}"
-                            aria-current="{% if forloop.counter0 == carousel_is_active %} true {% endif %}"
+                    <button type="button" data-bs-target="#id-carousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="{% if forloop.counter0 == carousel_is_active %}active{% endif %}"
+                            aria-current="{% if forloop.counter0 == carousel_is_active %}true{% endif %}"
                             aria-label="Slide {{ forloop.counter0 }}">
                     </button>
                 {% endfor %}
             </div>
             <div class="carousel-inner">
                 {% for item in carousel_images %}
-                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %} active {% endif %}">
-                        <img src="{% static 'img/' %}{{ item }}" class="d-block w-100 h-100"
-                             alt="Imagem {{ forloop.counter }}">
+                    <div class="carousel-item {% if forloop.counter0 == carousel_is_active %}active{% endif %}">
+                        <img src="{% static 'img/carrossel/' %}{{ item }}" class="d-block w-100 h-100"
+                             alt="Carrossel {{ forloop.counter }}"
+                             loading="lazy" data-aos="zoom-in" data-aos-delay="100">
                     </div>
                 {% endfor %}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#id-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Anterior</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button" data-bs-target="#id-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span><span
+                    class="visually-hidden">Próximo</span>
             </button>
         </div>
     </section>
-    <section class="container my-4">
-        <div class="text-center mb-3 text-animated">
-            <p class="h3 my-3 m-0">Escolha o plano perfeito para você e sua família.</p>
-        </div>
-        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs" role="tablist">
+
+    {# SEÇÃO DE PLANOS #}
+    <section class="container py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="my-3 text-center {{ text_animated }}">Escolha o plano perfeito para você e sua família.</h2>
+        <ul class="nav nav-underline justify-content-center card-header fw-semibold h6" id="planTabs"
+            role="tablist">
             {% for tipo in tipos %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link card-header {% if forloop.first %}active{% endif %}"
-                            id="{{ tipo }}-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#{{ tipo }}"
-                            type="button"
-                            role="tab"
-                            aria-controls="{{ tipo }}"
+                            id="{{ tipo }}-tab" data-bs-toggle="tab" data-bs-target="#{{ tipo }}" type="button"
+                            role="tab" aria-controls="{{ tipo }}"
                             aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
                         {{ tipo|capfirst }}
                     </button>
@@ -60,34 +55,28 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             {% for tipo in tipos %}
-                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tipo }}" role="tabpanel"
-                     aria-labelledby="{{ tipo }}-tab">
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ tipo }}"
+                     role="tabpanel" aria-labelledby="{{ tipo }}-tab">
                     {% if tipo == 'combos' %}
-                        {% include 'components/combos_tag.html' with lista_assinaturas=assinaturas|get_item:tipo %}
+                        {% include 'index/combos_tag.html' with lista_assinaturas=assinaturas|get_item:tipo %}
                     {% else %}
                         <div class="container-fluid">
-                            <!-- Iniciando uma nova row -->
                             <div class="row g-5 mt-0 justify-content-evenly">
                                 {% for assinatura in assinaturas|get_item:tipo %}
-                                    <!-- Abrir nova linha a cada 3 itens -->
                                     {% if forloop.counter0|divisibleby:3 %}
                                         </div>
-                                        <div class="row g-5 mt-0 justify-content-evenly">
+                                        <div class="row g-4 mt-0 justify-content-evenly">
                                     {% endif %}
-
-                                    <!-- Cada card ocupa 1/3 da largura -->
-                                    <article class="card text-center col-12 col-md-3 p-0">
-                                        <header class="card-header h4 text-white fw-semibold p-3">
-                                            {{ assinatura.nome }}
-                                        </header>
+                                    <article class="card text-center col-12 col-md-3 p-0" data-aos="fade-up"
+                                             data-aos-delay="150">
+                                        <header class="card-header h4 text-white fw-semibold p-3">{{ assinatura.nome }}</header>
                                         <div class="card-body">
                                             <h5 class="card-title text-success">R$ {{ assinatura.preco }}/mês</h5>
                                             <ul class="list-unstyled fw-semibold p-2 fs-6">
                                                 {% for descricao, link in assinatura.descricoes_links %}
                                                     <li class="m-3">
-                                                        <a href="#" class="link-custom">
-                                                            {{ descricao|capfirst }}
-                                                        </a>
+                                                        <a href="{{ link }}"
+                                                           class="link-custom">{{ descricao|capfirst }}</a>
                                                     </li>
                                                 {% endfor %}
                                             </ul>
@@ -108,48 +97,373 @@
         </div>
     </section>
 
-
-<!-- Estrutura inicial com as seções planejadas -->
-
-<section id="internet-fibra border" class="py-5 bg-light">
-    <div class="container">
-        <div class="hero bg-primary text-white py-5 mb-4">
-            <div class="text-center">
-                <h1 class="display-4">Internet Fibra Óptica</h1>
-                <p class="lead">Conexão rápida, estável e ideal para toda a família.</p>
-                <a href="#" class="btn btn-light btn-lg">Saiba Mais</a>
+    {# SEÇÃO SOBRE NÓS #}
+    <section id="sobre-nos" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold {{ text_animated }}">Conheça nossa empresa e nossos serviços</h2>
+                <p class="lead">
+                    Na Virtual Net, somos comprometidos em oferecer soluções de conectividade de ponta, telefonia,
+                    TV por assinatura e muito mais. Com anos de experiência no mercado, nossa missão é fornecer
+                    serviços confiáveis e suporte excepcional para você e sua família ou negócio.
+                </p>
+                <p class="lead">Descubra como podemos transformar sua experiência digital!</p>
             </div>
         </div>
-        <p class="text-center fs-5">
-            Descubra a velocidade e estabilidade da nossa Internet Fibra, com planos para todos os perfis.
-        </p>
-        <div class="row text-center">
-            <div class="col-md-4">
-                <i class="bi bi-lightning fs-1 text-success"></i>
-                <h5 class="mt-3">Alta Velocidade</h5>
-                <p>Internet com velocidades de até 1 Gbps.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="bi bi-shield-check fs-1 text-info"></i>
-                <h5 class="mt-3">Conexão Estável</h5>
-                <p>Navegação sem interrupções, mesmo nos momentos de maior uso.</p>
-            </div>
-            <div class="col-md-4">
-                <i class="bi bi-house-door fs-1 text-warning"></i>
-                <h5 class="mt-3">Para Toda a Família</h5>
-                <p>Planos que atendem às necessidades de todos em casa.</p>
+    </section>
+
+    {# SEÇÃO TV E INTERNET EM FIBRA #}
+    <section id="tv-internet-fibra" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="150">
+                    {% include "index/carrossel_servicos.html" with carousel_id="id-internet" carousel_items=carousel_internet carousel_int_is_active=carousel_int_is_active img_base_path="img/servicos/internet/" %}
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="150">
+                    <h2 class="{{ text_animated }} text-center my-4">Sua internet voando com a fibra óptica!</h2>
+                    <p class="text-center mb-4 fs-6">Experimente a internet mais rápida da região com nossa fibra
+                        óptica
+                        de última geração. Navegue, jogue online e faça streaming sem interrupções.</p>
+                    <h5 class="fw-semibold text-center mb-3">Aproveite os benefícios da fibra óptica:</h5>
+                    <ul class="text-center list-unstyled ps-3 mb-4 fs-6">
+                        <li>✔️ Velocidade e estabilidade superiores</li>
+                        <li>✔️ Maior segurança para seus dados</li>
+                        <li>✔️ Ideal para jogos online, streaming e home office</li>
+                        <li>✔️ Diferentes velocidades para atender às suas necessidades</li>
+                        <li>✔️ Suporte online 24 horas por dia, 7 dias por semana</li>
+                    </ul>
+                    <div class="p-2">
+                        <p class="lead text-center">Viva uma experiência completa de entretenimento com a Virtual
+                            Net.</p>
+                        <div class="d-flex justify-content-around flex-wrap mt-3">
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="200">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-fibra/seguranca.jpg' %}"
+                                     alt="Fibra Segurança" width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="300">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-fibra/gamer-2.jpg' %}"
+                                     alt="Experiência Gamer" width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="400">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-fibra/velocidade-1.jpg' %}"
+                                     alt="Velocidade Internet" width="82" height="82" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="#" class="btn btn-primary btn-lg">Conheça os Planos</a>
+    </section>
+
+    {# SEÇÃO TV POR ASSINATURA #}
+    <section id="tv-assinatura" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row p-1">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="150">
+                    <div class="m-1">
+                        <h2 class="{{ text_animated }} text-center my-4">TV por Assinatura com Conteúdo
+                            Completo</h2>
+                        <h5 class="fw-semibold text-center">Nossos pacotes de TV por assinatura oferecem:</h5>
+                        <ul class="list-unstyled ps-3 mb-4">
+                            <li class="mb-2 text-center">✔️ Uma ampla variedade de canais para todos os gostos</li>
+                            <li class="mb-2 text-center">✔️ Recursos interativos, como gravação de programas e
+                                replay
+                            </li>
+                            <li class="mb-2 text-center">✔️ Inclusão de plataformas de streaming (Netflix, Amazon
+                                Prime Video)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-3 mt-5">
+                        <h2 class="{{ text_animated }} text-center">App de Streaming Virtual Net</h2>
+                        <p class="lead text-center">Viva uma experiência completa de entretenimento com a Virtual
+                            Net.</p>
+                        <div class="d-flex justify-content-around flex-wrap mt-3">
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="200">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-stream/max.avif' %}"
+                                     alt="App Max" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="300">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-stream/paramont+.avif' %}"
+                                     alt="App Paramount+" loading="lazy">
+                            </div>
+                            <div class="btn p-0 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="400">
+                                <img class="img-fluid p-0" src="{% static 'img/servicos/app-stream/watchtv.avif' %}"
+                                     alt="App Watch TV" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center" data-aos="fade-left"
+                     data-aos-delay="200">
+                    <img src="{% static 'img/servicos/app-stream/virtual-net-app.jpg' %}"
+                         alt="Família assistindo TV"
+                         class="img-fluid p-3 m-1 border-cyan" loading="lazy">
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    {# SEÇÃO TELEFONIA #}
+    <section id="telefonia" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row rounded p-3 align-items-center">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="150">
+                    {% include "index/carrossel_servicos.html" with carousel_id="id-telefonia" carousel_items=carousel_telefonia carousel_active_index=carousel_tel_is_active img_base_path="img/servicos/movel/" %}
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                    <h2 class="{{ text_animated }} text-center my-3">Conecte-se com a melhor telefonia e chip
+                        móvel!</h2>
+                    <p class="text-center mb-4 fs-6">Descubra planos de telefonia com excelente cobertura e tarifas
+                        competitivas.
+                        Fale à vontade com quem você ama, aproveitando chamadas ilimitadas para todo o país e
+                        roaming nacional sem
+                        custos adicionais.</p>
+                    <h5 class="fw-semibold text-center mb-1">Aproveite as vantagens dos nossos serviços:</h5>
+                    <ul class="text-center list-unstyled ps-3 mb-4 fs-6">
+                        <li>✔️ Chamadas ilimitadas para todo o país</li>
+                        <li>✔️ Planos pré e pós-pagos que cabem no seu bolso</li>
+                        <li>✔️ Roaming nacional sem custos adicionais</li>
+                        <li>✔️ Pacotes de dados móveis de até 20 GB</li>
+                        <li>✔️ Atendimento ao cliente 24/7</li>
+                    </ul>
+                    <div class="p-1">
+                        <div class="d-flex justify-content-around flex-wrap mt-1">
+                            <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="250">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-movel/telefone.jpg' %}"
+                                     alt="Telefonia Nacional" width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="300">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-movel/celular-app.jpg' %}"
+                                     alt="Chip Móvel"
+                                     width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column justify-content-center align-items-center border-cyan"
+                                 data-aos="zoom-in" data-aos-delay="350">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-movel/celular.jpg' %}"
+                                     alt="Roaming Nacional"
+                                     width="82" height="82" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    {# SEÇÃO TELMEDICINA #}
+    <section id="telmedicina" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row rounded p-3 align-items-center">
+                <div class="col-md-6 mt-1" data-aos="fade-right" data-aos-delay="150">
+                    <h2 class="{{ text_animated }} text-center my-2">Conecte-se com a saúde na palma da sua
+                        mão!</h2>
+                    <p class="text-center mb-4 fs-6">Com nossa solução de telemedicina, você tem acesso rápido e
+                        seguro a serviços
+                        de saúde onde estiver. Consultas online, agendamento prático e suporte especializado em
+                        apenas alguns cliques.</p>
+                    <h5 class="fw-semibold text-center mb-2">Aproveite os benefícios da telemedicina:</h5>
+                    <ul class="text-center list-unstyled ps-3 mb-4 fs-6">
+                        <li>✔️ Consultas médicas online de forma rápida e segura</li>
+                        <li>✔️ Acesso a médicos especialistas 24/7</li>
+                        <li>✔️ Agendamento prático e sem complicações</li>
+                        <li>✔️ Redução de custos com deslocamento e tempo</li>
+                    </ul>
+                    <div class="p-2">
+                        <p class="lead text-center">Cuide da sua saúde com a comodidade que você merece.</p>
+                        <div class="d-flex justify-content-around flex-wrap mt-1">
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in"
+                                 data-aos-delay="200">
+                                <img class="img-fluid" src="{% static 'img/servicos/app-medicina/seguranca.jpg' %}"
+                                     alt="Segurança Médica" width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in"
+                                 data-aos-delay="300">
+                                <img class="img-fluid"
+                                     src="{% static 'img/servicos/app-medicina/equipamento.jpg' %}"
+                                     alt="Agendamento Fácil" width="82" height="82" loading="lazy">
+                            </div>
+                            <div class="btn p-1 m-1 d-flex flex-column align-items-center border-cyan"
+                                 data-aos="zoom-in"
+                                 data-aos-delay="400">
+                                <img class="img-fluid"
+                                     src="{% static 'img/servicos/app-medicina/medicina movel.jpg' %}"
+                                     alt="Suporte Médico" width="82" height="82" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                    {% include "index/carrossel_servicos.html" with carousel_id="id-telemedicina" carousel_items=carousel_telemedicina carousel_active_index=carousel_med_is_active img_base_path="img/servicos/medicina/" %}
+                </div>
+            </div>
+        </div>
+    </section>
 
+    {# SEÇÃO SOLUÇÕES CORPORATIVAS #}
+    <section id="corporativas" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container p-1">
+            <h2 class="text-center fw-bold mb-4 {{ text_animated }}">Soluções Corporativas</h2>
+            <p class="text-center fs-5 mb-4">Oferecemos serviços completos para empresas que buscam internet
+                robusta, telefonia
+                de qualidade e conectividade avançada.</p>
+            <div class="row text-center">
+                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/servicos/corporativo/fibra.jpg' %}" alt="Internet Dedicada"
+                             class="m-1 border-cyan"
+                             width="300" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Internet Dedicada</h5>
+                        <p class="fs-6">Conexão de alta velocidade e estabilidade para garantir produtividade máxima
+                            e velocidade.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/servicos/corporativo/fixo.jpg' %}" alt="IP Fixo"
+                             class="m-1 border-cyan"
+                             width="300" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">IP Fixo Corporativo</h5>
+                        <p class="fs-6">Maior segurança e controle na rede, facilitando acesso remoto e serviços
+                            internos.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/servicos/corporativo/pabx.jpg' %}" alt="PABX"
+                             class="m-1 border-cyan"
+                             width="300" height="300" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">PABX</h5>
+                        <p class="fs-6">Centralize e gerencie suas ligações telefônicas com soluções modernas de
+                            comunicação.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/servicos/corporativo/sip.jpg' %}" alt="SIP" class="m-1 border-cyan"
+                             width="300"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">SIP</h5>
+                        <p class="fs-6">Protocolo de voz sobre IP para chamadas mais econômicas e integrações
+                            avançadas.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    {# SEÇÃO SOBRE O CLIENTE #}
+    <section id="sobre-cliente" class="py-5 my-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="container p-4">
+            <h2 class="text-center fw-bold mb-4 {{ text_animated }}">Nossa Prioridade é Você</h2>
+            <p class="text-center fs-5 mb-4">Na VirtualNet, cada cliente é único. Oferecemos soluções
+                personalizadas,
+                atendimento excepcional e serviços que realmente fazem a diferença no seu dia a dia.</p>
+            <div class="row text-center">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/atendente.jpg' %}" alt="Atendente"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Suporte 24/7</h5>
+                        <p class="fs-6">Sempre prontos para suas dúvidas e resolução de problemas.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Fale Conosco</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/qualidade.jpg' %}" alt="Qualidade"
+                             class="m-1 border-cyan" width="380"
+                             loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Qualidade Garantida</h5>
+                        <p class="fs-6">Serviços projetados para oferecer a melhor experiência.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{% static 'img/atendimento/relacionamento.jpg' %}" alt="Relacionamento"
+                             class="m-1 border-cyan"
+                             width="380" loading="lazy">
+                        <h5 class="mt-3 fw-bold {{ text_animated }}">Relacionamento Próximo</h5>
+                        <p class="fs-6">Valorizamos cada cliente, criando conexões reais e duradouras.</p>
+                        <a href="{% url 'suporte_tecnico' %}" class="btn assine-agora mb-3">Conheça a VirtualNet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# SEÇÃO LOCALIZAÇÃO #}
+    <section class="py-5 my-5" id="localizacao" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row mb-1">
+                <div class="col-12 text-center">
+                    <h2 class="fw-bold {{ text_animated }}">Onde Estamos</h2>
+                    <h6>Visite nossas unidades, será um prazer recebê-lo!</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Matriz (Matrix)</h4>
+                    <p class="text-center fs-6">
+                        Estrada do Jathay, 330<br>
+                        Vila Nossa Sra. Aparecida, Carapicuíba - SP, 06390-180<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1828.8758529196143!2d-46.85271593034627!3d-23.541431198675852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf01b17bfaa94b%3A0x79f8f6cd65ac19be!2sRede%20Virtual%20Net%20-%20Fibra%20%C3%B3ptica!5e0!3m2!1spt-BR!2sus!4v1737057705454!5m2!1spt-BR!2sus"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Loja Lambari</h4>
+                    <p class="text-center fs-6">
+                        Rua Tiradentes, 122<br>
+                        Lambari - MG, 37480-000<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3699.9678336125876!2d-45.350577423612016!3d-21.974197579922407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cb19a672063273%3A0x7ab66b8ff6cfc9b2!2sR.%20Tiradentes%2C%20122%2C%20Lambari%20-%20MG%2C%2037480-000!5e0!3m2!1spt-BR!2sbr!4v1737057991070!5m2!1spt-BR!2sbr"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <h4 class="fw-bold text-center {{ text_animated }}">Loja Jesuânia</h4>
+                    <p class="text-center fs-6">
+                        Rua Luiz Alves da Silva, 92B<br>
+                        Jesuânia - MG, 37485-000<br>
+                        <strong>Telefone:</strong> (11) 41818381<br>
+                        <strong>Horários:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h
+                    </p>
+                    <div class="ratio ratio-16x9 border-cyan">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924.8401170893276!2d-45.29089933034837!3d-21.997495098744075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cb3d5aaef8ada1%3A0x98defbbe2acef2ea!2sR.%20Lu%C3%ADs%20Alves%20da%20Silva%2C%2072%20-%20Jesuania%2C%20Jesu%C3%A2nia%20-%20MG%2C%2037485-000!5e0!3m2!1spt-BR!2sbr!4v1737058325473!5m2!1spt-BR!2sbr"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
-
-
-

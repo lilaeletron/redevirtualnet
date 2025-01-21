@@ -17,16 +17,3 @@
  * - Mantém uma experiência de usuário consistente, respeitando a preferência definida.
  */
 
-(function () {
-    // Obtém a preferência de tema do usuário do localStorage.
-    // Espera-se que o valor seja 'dark' ou 'light', ou nulo se não definido.
-    var theme = localStorage.getItem('theme');
-
-    // Se o valor encontrado for 'dark', definimos a classe "dark-theme".
-    // Caso contrário, utilizamos "light-theme" como padrão.
-    if (theme === 'dark') {
-        document.documentElement.classList.add('dark-theme');
-    } else {
-        document.documentElement.classList.add('light-theme');
-    }
-})();

@@ -1,0 +1,910 @@
+Arquivo: .\core\admin.py
+Resumo:
+Aqui está uma lista resumida do arquivo .core/admin.py:
+
+- A administração é criada para as classes `Assinatura`, `Servico` e `Modal`.
+- Essas classes definem o layout das listagens, filtros e busca de registros.
+- As configurações específicas para cada modelo incluem campos exibidos, filtrados e buscados, além de ordenação padrão e Campos editáveis.
+- A class `Assinatura` tem um formulário detalhado com campos de informações gerais e descrição associada.
+- A classe `Servico` tem um formulário detalhado com campos de informações gerais e especificamente relacionado ao Servicio.
+- A classe `Modal` tem um formulário detalhado com campos de informações gerais, histórico e atualização específicos para o Modelo.
+- As classes `CategoriaLimite`, `Reclamacao` são registradas como modelos próprios no arquivo.
+
+Essa administração é gerenciada pelo modelo `admin.py` que cria os formulários detalhados e as listagens padrão de registros.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\apps.py
+Resumo:
+O arquivo `apps.py` do Django inclui uma definição para um aplicativo chamado `Core`, com as seguintes propriedades:
+
+- Nome: `Core`
+- Diferenciais padrões:
+ - Auto-field definido no padrão `django.db.models.BigAutoField`
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\forms.py
+Resumo:
+O arquivo `core/forms.py` contém dois modelos de formatação: `ReclamacaoForm` e `AssinaturaClienteForm`. Essas formas permitem a criação e validação de dados relacionados a reclamações e assinaturas clientes, respectivamente. As duas formas são ModelForm, que é uma classe fornecida pela biblioteca Django para criar formatações de modelos do sistema de banco de dados.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\models.py
+Resumo:
+Aqui está uma visão geral do código que parece ser um modelo de banco de dados para gerenciar serviços, clientes e categorias. As classes incluem:
+
+- `Servico`: Define os servicos, incluindo categorias, preços, descrições, ativos, imagens e destaque.
+
+- `AssinaturaCliente`: Contém informações sobre clientes, como seus nomes, e-mails de contato, telefone e datas de assinaturas.
+
+- `CategoriaLimite`: Define as limitações para as categorias (por exemplo, serviços que não podem ser combinados) e o número máximo de serviços por categoria.
+
+Cada classe tem seus próprios atributos e métodos úteis. Aqui estão alguns pontos importantes:
+
+1. **Modelagem dos dados**: Cada classe tem um nome clássico e uma visão mais detalhada, como `AssinaturaCliente` e `CategoriaLimite`.
+
+2. **Relações entre as tabelas**: Existem relações foráneas para conectar as tabelas de serviços, clientes e categorias. Por exemplo, quando um cliente é associado a um serviço, há uma relação estreita.
+
+3. **Validação**: A classe `Servico` tem um método chamado `clean`, que verifica se o preço do serviço é maior que zero e faz uma validação para garantir que as outras informações estão corretas.
+
+4. **Ordering**: Há uma ordem de classificação por categoria e preço no banco de dados, o que permite que os usuários possam filtrar serviços por categoria ou preço.
+
+5. **Permissões**: O modelo de acesso a classe `Servico` define permissões para a classe em si, como a necessidade de ter um cliente ativo antes de criar um novo serviço.
+
+6. **Uso de enums**: No caso da categoria, temos um uso de enums (`CATEGORIA_CHOICES`) que reduzem o tamanho do código de texto e torna mais fácil entender as operações.
+
+7. **Importante a documentação**: Existem declarações de método `__str__` em todas as classes, que devem incluir informações úteis sobre o que o método exatamente faz. Isso ajuda a entender melhor a estrutura do nosso modelo.
+
+O código é bem organizado e está se adequando para um banco de dados de gerenciamento de serviços e clientes. No entanto, é sempre uma boa ideia revisar e testar cuidadosamente qualquer alteração ou adição ao seu modelo de banco de dados para garantir que funcione corretamente.
+
+Cadeia de Funções:
+- Funções Definidas: ['__str__', '__str__', '__str__', 'descricoes_links', 'descricoes', 'tipos_unicos_ativos', 'assinaturas_por_tipo', 'clean', '__str__', '__str__', '__str__']
+- Funções Chamadas: ['sorted', 'range', 'ValidationError', 'list', 'len', 'getattr']
+- Funções Não Usadas: ['__str__', '__str__', '__str__', 'descricoes_links', 'descricoes', 'tipos_unicos_ativos', 'assinaturas_por_tipo', 'clean', '__str__', '__str__', '__str__']
+================================================================================
+Arquivo: .\core\tests.py
+Resumo:
+O arquivo test.py contém uma classeTestCase, que é um teste unitário no Django.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\urls.py
+Resumo:
+O arquivo `urls.py` de Django apresenta uma lista de rotas para diferentes viewas. Cada rota é associada a um nome específico e um método `as_view()` que exibe a view correspondente quando solicitado.
+
+As listas de rotas são organizadas em categorias, com cada categoria contendo uma ou mais rotas relacionadas a planos, ferramentas, suporte e área do cliente.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: ['path']
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\views.py
+Resumo:
+Aqui está uma resumo do conteúdo extraído do arquivo .core/views.py:
+
+O arquivo contém várias classes de view para a aplicação Django, cada uma com um propósito específico. Aqui estão os principais pontos:
+
+*   `IndexView`: View responsável por exibir a página de entrada da aplicação.
+*   `QuemSomosView` e `MissaoVisaoValoresView`: Views que exibem informações sobre a empresa, incluindo sua missão e visão de valores.
+*   `InternetFibraView`, `TelefoniaView`, `TVStreamingView`: Views que exibem informações específicas relacionadas à internet, telefonia e televisão.
+*   `CombosPersonalizadosView`: View que exibe uma lista com combinações personalizadas de serviços.
+*   `SimuladorPlanosView` e `TesteVelocidadeView`: Views que simulam planos de assinatura e testemunham velocidades para o simulação.
+*   `FAQView`: View responsável por exibir perguntas frequentes da aplicação.
+*   `SuporteTecnicoView`: View que fornece suporte técnico para os usuários.
+
+Cadeia de Funções:
+- Funções Definidas: ['get_context_data', 'get_context_data', 'get_context_data', 'form_valid', 'get_context_data']
+- Funções Chamadas: ['super', 'reverse_lazy', 'ImageCarousel']
+- Funções Não Usadas: ['get_context_data', 'get_context_data', 'get_context_data', 'form_valid', 'get_context_data']
+================================================================================
+Arquivo: .\core\migrations\0001_initial.py
+Resumo:
+Essa é uma definição de migrations para um banco de dados Django. Aqui está um resumo do conteúdo extraído:
+
+Essas são as primeiras instruções da migrate:
+- Cria a migration 0001_initial
+- Definidos cinco modelos: Assinatura e Reclamacao
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0002_alter_assinatura_plano.py
+Resumo:
+O arquivo .core/migrations/0002_alter_assinatura_plano.py é uma migration Django que altera as propriedades de um modelo chamado Assinatura, especificando o plano de assinatura disponível para essa tabela.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0003_plano.py
+Resumo:
+Este arquivo de Django é um módulo de migração (migration) que criou uma nova tabela no banco de dados para armazenar informações sobre "Plano". Nesta tabela, são armazenados os campos: id, nome, descrição e preço.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0004_rename_plano_servico_combo.py
+Resumo:
+O arquivo .py de código migration "0004_rename_plano_servico_combo.py" é um exemplo de migrate Django para atualizar a estrutura dos bancos de dados do aplicativo. Aqui está uma resumo da mudança feita:
+
+- Renomeia o modelo 'Plano' para 'Servico'.
+- Cria um novo modelo chamado "Combo", que é uma relação muit-to-muit com o modelo 'Servico'.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0005_delete_combo_delete_servico.py
+Resumo:
+Essa é uma migration Django que remove os modelos 'Combo' e 'Servico'. A mudança foi necessária para reorganizar a estrutura do banco de dados.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0006_combo.py
+Resumo:
+Essa é uma alteração de modelagem criada no Django para criar um novo modelo chamado Combo. O modelo possui 5 campos:
+
+- `id`: um campo auto-incrementante com chaves primárias.
+- `nivel`: um campo de tipo char com opções de "padrao", "plus" e "pro".
+- `nome`: um campo de tipo varchar com uma capacidade máxima de 100 caracteres.
+- `descricao`: um campo de tipo txt, permitindo a inserção de texto.
+- `preco`: um campo de tipo decimal com as seguintes propriedades: 
+ - DecimalPlaces: 2
+ - MaxDigits: 10
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0007_remove_combo_nome.py
+Resumo:
+Essa é uma migration de Django que removala o campo `nome` do modelo `Combo`.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0008_assinaturacliente_delete_combo_and_more.py
+Resumo:
+Este arquivo de migração Django contém as alterações necessárias para criar um modelo chamado `AssinaturaCliente` no banco de dados. O novo modelo inclui novas propriedades, como `link1`, `link2`, `link3`, `link4`, `link5`, `link6`, `link7`, `link8` e `link9`. Além disso, são adicionadas propriedades relacionais para a tabela `Assinatura`, que está relacionada com a tabela `AssinaturaCliente`.
+
+A lista de alterações inclui:
+
+*   Novas propriedades:
+    *   `ordem`: um íngerico com valor padrão 1.
+    *   `tipo`: uma caixa de seleção com opções "combos", "internet", "tv", "streaming", "controle" e "movel".
+    *   `ultima_atualizacao`: uma data-hora automática atualizada.
+    *   `plano`: uma relação com a tabela `Assinatura` que é um campo forêne.
+*   Relacionamento com a tabela `AssinaturaCliente`.
+*   Criação de novas propriedades no modelo `AssinaturaCliente`.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0009_alter_assinatura_descricao1_and_more.py
+Resumo:
+Essa migration alterou as propriedades das descrições das assinaturas do banco de dados. Elas foram modificadas para permitir a inserção de valores vazios ou nulos em alguns campos.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0010_assinatura_preco.py
+Resumo:
+Este arquivo de Django é um módulo de migração que adiciona um campo "preco" à tabela `Assinatura`.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0011_servico.py
+Resumo:
+O arquivo .\core\migrations\0011_servico.py é um módulo de migração Django que criou um novo modelo chamado Servico. Este modelo inclui os seguintes campos:
+
+- ID (chave primária)
+- Nome
+- Categoria
+- Preço
+- Descrição (opcional)
+- Ativo (bool)
+
+Essas informações são armazenadas em uma tabela chamada Servico, que é a instância do modelado definida no arquivo .\core\migrations\0010_assinatura_preco.py.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0012_alter_servico_options_servico_destaque_and_more.py
+Resumo:
+Essa migration alterou as configurações do modelo de serviço na base de dados do Django e adicionou novas propriedades para os objetos de serviço. A alteração mais notável foi a mudança da ordem dos campos de busca no `servico` model, tornando-o ordenar por categoria antes de preço, e a adição de um novo campo chamado "destaque" que define se um serviço deve ser exibido ou não. Além disso, novas propriedades foram adicionadas para capturar imagens dos serviços, categorias, descrições e preços.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0013_categorialimite.py
+Resumo:
+O arquivo .migrations\0013_categorialimite.py é uma mudança de versão de Django e define uma nova tabela no banco de dados. A criação da tabela 'CategoriaLimite' inclui as seguintes colunas:
+
+- `id`: chave primária auto-incrementada;
+- `categoria`: caractere que pode ser escolhido das categorias definidas, com opções "Internet", "TV", "Telefonia", "Chip Móvel", "Telemedicina", "Ponto Wi-Fi 2.4G" e "IP Gamer";
+- `limite`: campo positivo que define o número máximo de serviços da categoria que podem ser selecionados em um combo, com uma default de 1;
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0014_alter_servico_categoria.py
+Resumo:
+A classe Migration altera o campo "categoria" do modelo Servico para incluir novas opções de categorias.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0015_modal_alter_assinatura_link1_alter_assinatura_link10_and_more.py
+Resumo:
+Este arquivo de Django Migration é um histórico das alterações realizadas no modelo "Assinatura" do banco de dados. Aqui está uma resumo dos changes feitos:
+
+- Criação da tabela "Modal"
+- Alteração da tabela "Assinatura" para incluir novos campos: id, tipo_de_assinatura, data_iniciativa, motivo, status, ...
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\migrations\0016_alter_assinatura_link1_alter_assinatura_link10_and_more.py
+Resumo:
+Essa é uma lista de fâbricas (ou alterações) que foram incluídas no Django framework em um arquivo de modelo. Cada alteração é representada por uma linha, e cada linha define um atributo ou propriedade para um objeto.
+
+As alterações são:
+
+* `link1` a `link9`: todos os campos têm o mesmo tipo (`CharField`, que pode ser usado como string, número decimal, etc.)
+* `type_` é um campo que não tem o mesmo nome em todas as linhas
+
+Para entender melhor essas alterações, você precisará analisar cada linha e identificar o atributo ou propriedade que está sendo modificada. Alguns exemplos de como cada linha pode ser escrita:
+
+```python
+# Variável
+link1 = models.CharField(max_length=255)
+
+# Campo que não tem o mesmo nome em todas as linhas
+type_ = models.IntegerField()
+```
+
+Essas alterações são importantes porque elas afetam a estrutura e os campos do modelo, o que pode afetar a forma como você utiliza o Django para criar e gerenciar dados.
+
+Cadeia de Funções:
+- Funções Definidas: []
+- Funções Chamadas: []
+- Funções Não Usadas: []
+================================================================================
+Arquivo: .\core\static\css\cards.css
+Resumo:
+Aqui está uma resumo do conteúdo extraído do arquivo .css de cards.css:
+
+- Adinamos as cores e estilos dos elementos card ao estilo padrão, incluindo a adição de transições e hover.
+- Definimos diferentes estilos para diferentes tipos de abas (header, footer) e links.
+- Criaamos diferentes estilos para artesanato (custom) e hover.
+- Adicionamos uma animação de textos para abas.
+- Definimos estilos para as abas que se tornam visíveis quando são clicadas nos links.
+- Criamos diferentes estilos para as cartões de comodidade.
+- Definimos estilos para os elementos card title e card text.
+================================================================================
+Arquivo: .\core\static\css\chat.css
+Resumo:
+O arquivo `chat.css` contém estilos para um projeto chamado "Chat" que utiliza o framework de partículas Particles.js. Os principais estilos incluem:
+
+- Advanced Footer: adicionalmente sombra ao fundo do footer.
+- Container do conteúdo: posicionar e ajustar a posição da área de conteúdo abaixo do footer, com transição de z-index para superior.
+- Links de navegação: sobe o texto "Texto" na página do menu de links.
+- Feedback animado para newsletter: adicionar uma animação de saída e entrada para o elemento "Informações de Newsletter".
+- Feed atualizações: adicionar transições para os elementos da lista de atualizações, incluindo transformação e sombra ao hover.
+================================================================================
+Arquivo: .\core\static\css\header.css
+Resumo:
+Aqui está uma lista dos ajustes de estilo que você mencionou:
+
+1. **Botão "Assine Agora"**: Adicione um som de pulso ao botão com a animação `pulse` e adicione cores ao seu design.
+2. **Ícones sociais (desktop)**: Altere as cores das redes sociais e ajuste o tamanho e espaçamento dos ícones.
+
+Aqui está uma versão simplificada da sua lista de ajustes de estilo:
+
+**Botão "Assine Agora"**
+
+* Animação de pulso
+* Cor alterada para laranja
+
+**Ícones sociais (desktop)**
+
+* Cor alterada para verde
+* Ajuste do tamanho e espaçamento dos ícones
+================================================================================
+Arquivo: .\core\static\css\hero-section.css
+Resumo:
+O conteúdo extraído do arquivo `.hero-section.css` é:
+
+- O elemento `carousel-item` tem um tamanho de altura igual à metade da altura vertical do contêiner.
+- O elemento `.btn` manteve a margem superior igual à 15px (ou 20px, dependendo da configuração específica).
+- As setas de navegação foram alteradas para brancos em fundos escuros.
+================================================================================
+Arquivo: .\core\static\css\servicos.css
+Resumo:
+Esses são os principais pontos do código CSS fornecido:
+
+- Estilos gerais para elementos com o classe `servicos-div-default`.
+- Estilo específico para imagens, mantendo a propriedade `object-fit` em "cover" para garantir que a imagem seja ajustada sem corte ao redor da imagem.
+================================================================================
+Arquivo: .\core\static\js\chat.js
+Resumo:
+O arquivo `chat.js` do projeto Chatbot é responsável por gerenciar a interação entre o usuário e o chatbot. Aqui está uma resumo claro e conciso do conteúdo extraído:
+
+1. **Toggler da janela de chat**: O código adiciona eventos aos botões de tigela e fechamento para controlar a visibilidade da janela de chat.
+2. **Mensagem do usuário**: O usuário insere texto em um campo de entrada, que é armazenado no estado `chatInput`.
+3. **Envio da mensagem**: Cada clique no botão de envio da mensagem adiciona uma nova mensagem ao corpo da página e atualiza o campo de entrada.
+4. **Botão de resposta do chatbot**: O código simula um respostário do chatbot com uma mensagem predefinida após 1 segundo.
+
+Aqui está um exemplo de como funciona a implementação:
+
+- Quando o usuário clique no botão de enviar, uma nova mensagem é adicionada ao corpo da página e atualizada no campo de entrada.
+- O código também simula a resposta do chatbot (neste caso, apenas uma mensagem predefinida) após 1 segundo.
+
+Observações importantes:
+
+* A janela de chat pode estar oculta ou visível dependendo das configurações do usuário.
+* As mensagens e respostas podem ser diferentes se o usuário for um cliente externo ou um funcionário da empresa.
+================================================================================
+Arquivo: .\core\static\js\scroll-snap.js
+Resumo:
+O arquivo `scroll-snap.js` é um módulo de JavaScript que permite implementar o scroll snapping no navegador, ou seja, a seção da página se comporta como se estivesse sendo scrollado em intervalos regulares para manter os elementos dentro dela em seus locais específicos na tela.
+
+Cada seção do documento foi identificada através do elemento `#snapContainer` e inicializada com o índice de seção correspondente (`currentIndex`). Uma flag chamada `isScrolling` é usada para controlar o comportamento do scroll, evitando múltiplos gatilhos.
+
+A função `scrollToSection(index)` faz o scrolling específico para a seção indicada (`index`) e atualiza o índice de seção correspondente. Um setTimeout é usado para liberar a flag após um tempo de 500ms, permitindo outros eventos terem uma chance de serem processados.
+
+Os eventos do evento `wheel` são registrados no elemento `#snapContainer` e funcionam assim:
+
+- Se estiver rolando para baixo, o evento é ignorado e o próximo intervalo de scroll deve ser iniciado com a função `scrollToSection(currentIndex + 1)`.
+- Se estiver rolando para cima, o evento é ignorado e a seção anterior será procurada com a função `scrollToSection(currentIndex - 1)`.
+
+O uso do evento `wheel` permite um comportamento de scroll fluido e suave, mantendo os elementos dentro das seções em seus locais específicos na tela.
+================================================================================
+Arquivo: .\core\static\js\theme-init.js
+Resumo:
+A função Anônima Imediatamente Invocada (IIFE) para inicialização do tema no arquivo `theme-init.js` lê o valor de localStorage e aplica um estilo CSS correspondente ao tema escolhido (claro ou escuro) ao elemento raiz (`html`) antes do carregamento completo do CSS, evitando flashes indesejados.
+================================================================================
+Arquivo: .\core\static\js\toggle-theme.js
+Resumo:
+A função `applyTheme` da classe `togle-theme.js` determina se o tema é escuro ou claro com base na configuração ou nas preferências do sistema. Isso envolve a remoção de classes existentes, a adição de uma nova class para cada modo e a mapeamento de ícones e textos para cada modo.
+
+No entanto, podemos resumir o conteúdo da função de forma clara e sem frases desnecessárias:
+
+1. Verifica se é necessário mudar o tema.
+2. Remove as classes existentes do corpo do documento.
+3. Adicione a classe `dark-theme` ou `light-theme` com base na condição determinada anteriormente (escuro/claro ou auto).
+4. Mapeia os ícones e textos para cada modo (modo escuro: <use href="/static/svg/sprite.svg#moon-stars-fill">, modo claro: <use href="/static/svg/sprite.svg#sun-fill">, auto: <use href="/static/svg/sprite.svg#circle-half">).
+5. Atualiza a descrição do tema e o ícone do botão ativo no menu de seleção de tema.
+6. Salva o tema escolhido no localStorage.
+
+Lembre-se de que essa função é parte da classe `togle-theme.js` e está relacionada ao evento `DOMContentLoaded`, que é chamado quando a página carrega completamente.
+================================================================================
+Arquivo: .\core\static\vendor\bootstrap\css\bootstrap.min.css
+Resumo:
+This is a CSS code snippet, specifically the Bootstrap 5 framework's CSS file. It defines various classes and styles for different elements on a webpage.
+
+To write this code from scratch, you would need to understand HTML structure, CSS selectors, and their usage in conjunction with Bootstrap classes. Here's a breakdown of what each class does:
+
+- `.fs-1` to `.d-print-inline`: These are font sizes used for printing purposes.
+- `.d-print-grid`: This is a grid system used to create responsive grids for print layouts.
+- `.d-print-block`: A display block element that can be printed as a single page or split into multiple pages based on the print layout.
+- `.d-print-table`: A table-based layout for print publications.
+
+The main purpose of this code is to define how different elements should look and behave when displayed on a webpage, particularly in print mode. This includes things like margins, padding, font sizes, and line heights.
+
+Here's an example snippet that demonstrates the usage:
+
+```html
+<h1 class="fs-2 text-center text-lg">Bootstrap 5 Example</h1>
+```
+
+This will display a large "Bootstrap 5" heading in the center of the page with a medium font size.
+================================================================================
+Arquivo: .\core\static\vendor\bootstrap\js\bootstrap.bundle.min.js
+Resumo:
+This is a JavaScript code that defines several classes and functions for interacting with Bootstrap, a popular front-end framework. Here's a breakdown of the different parts:
+
+**Class definitions**
+
+1. `ao`: This class extends the `W` class (not shown in the provided code) and provides functionality for creating and managing toasts.
+2. `Ks`: This class is an extension of the `W` class, providing additional methods for interacting with Bootstrap components.
+
+**Methods**
+
+1. `Default`: This method returns an object with default properties that can be used as a starting point for toast creation.
+2. `DefaultType`: This method returns the type of the default value (e.g., "toast").
+3. `NAME`: This method returns the name of the class (e.g., "Toast").
+
+**Methods**
+
+1. `show()`: This method creates and shows a toast with animation if necessary.
+2. `hide()`: This method hides a toast without animation.
+3. `dispose()`: This method disposes of the toast object.
+4. `_maybeScheduleHide()`: This method schedules the hide operation to be called after a certain delay, depending on the autohide property of the toast.
+5. `_onInteraction(t,e)`: This method is called when the user interacts with the toast (e.g., clicks or focuses it). It checks if the interaction type matches the one specified in the event object and calls an appropriate method based on that type.
+
+**Event handlers**
+
+1. `N.on(event, handler)`: This method adds an event listener to a specific event.
+2. `_clearTimeout()`: This method clears any existing timeout for animation or other effects.
+
+**Variables**
+
+1. `_timeout`: This variable stores the ID of the timeout object created by `_maybeScheduleHide()`.
+
+Overall, this code provides a set of classes and methods that allow users to interact with Bootstrap components using JavaScript and HTML events.
+================================================================================
+Arquivo: .\core\templates\area_cliente.html
+Resumo:
+O arquivo `area_cliente.html` é um template HTML para criar uma página de área do cliente na plataforma Virtual Net. Aqui está uma resumo clara e conciso do conteúdo:
+
+- Extende o template base `base.html`.
+- Defina o título da página como "Área do Cliente - Rede Virtual Net".
+- Contente com uma introdução simples, destacando que é a área do cliente.
+- Implemente funcionalidades adicionais, como:
+ - Informações sobre serviços.
+ - Faturas.
+ - Atualizações de informações.
+================================================================================
+Arquivo: .\core\templates\assine_agora.html
+Resumo:
+O arquivo .html de `main/templates/main/assine_agora.html` parece ser um exemplo de layout HTML para uma página de assinatura ou planos na rede virtual Net. Aqui está uma resuma da estrutura do conteúdo:
+
+*   Extende o template `base.html` para criar um novo bloco chamado `title`, que inclui o título da página ("Assine Agora - Rede Virtual Net").
+*   Cria um bloco chamado `content` que contém a mensagem principal da página ("Escolha o plano que melhor se adapta às suas necessidades e comece a desfrutar dos nossos serviços de internet de alta qualidade.").
+*   Lista os planos disponíveis na rede virtual Net, incluindo detalhes sobre cada plano (nome do plano e tipo de plano).
+================================================================================
+Arquivo: .\core\templates\base.html
+Resumo:
+O arquivo `base.html` é um template para uma página web que inclui várias partes, como:
+
+*   Uma lógica de incluindo statics (`{% load static %}`) e bibliotecas (`{% load bootstrap5 %}`)
+*   Um head com metadados (charset, viewport, title)
+*   Scripts para instalar a theme, Bootstrap e outros componentes
+*   Estilos CSS para diferentes partes da página (header, chat, hero, etc.)
+*   Uma função `block` utilizada para criar bloques de conteúdo (`{% block content %}{% endblock %}`)
+================================================================================
+Arquivo: .\core\templates\combos_personalizados.html
+Resumo:
+A código parece ser um exemplo de HTML, CSS e JavaScript utilizado para criar uma página web que apresenta diferentes seções, incluindo:
+
+1. Uma seção de perguntas frequentes com várias perguntas e respostas.
+2. Uma seção de modal com um resumo do plano personalizado gerado.
+3. Uma seção de roteadores (também conhecidos como "plano gerador") que permite que os usuários criem um plano personalizado.
+
+Aqui está uma explicação mais detalhada sobre cada seção:
+
+**Perguntas frequentes**
+
+Essa seção é apresentada em três perguntas diferentes, com respostas detalhadas. A ideia é que os usuários possam acessar essas perguntas e respostas quando precisarem de mais informações ou dúvidas.
+
+**Modal com resumo do plano gerado**
+
+Seu Plano Personalizado é uma seção que apresenta um resumo do plano gerado para o usuário. O resumo inclui várias vantagens do plano, como suporte especializado 24h, upgrade e downgrade simplesificados e economia garantida ao agrupar serviços.
+
+**Plano gerador**
+
+O roteador (plano gerador) é uma seção que permite que os usuários criem um plano personalizado. A interface é fácil de usar e oferece várias opções para definir os serviços e categorias do plano. Além disso, o plano gerador também inclui uma modal com um resumo do plano gerado.
+
+**Modals**
+
+Os modais são partes visuais que podem ser abertos e fechados por meio de botões ou clics. Neste caso, há dois modais:
+
+* Moda para mostrar o resumo do plano gerado (assegurando que os usuários não tenham que criar uma página web novamente).
+* Modal para assinar um plano personalizado.
+
+**CSS e JavaScript**
+
+Os CSS e JavaScript são utilizados para estilizar a página web e executar algumas funcionalidades, como a animação de transição entre as seções. No entanto, não há nenhuma lógica de programação envolvida no código.
+
+**Vantagens do plano gerador**
+
+O plano gerador é uma ferramenta útil para ajudar os usuários a escolher um plano que atenda às suas necessidades específicas. A interface do plano gerador é fácil de usar e oferece várias opções para definir os serviços e categorias do plano.
+
+**Ferramentas adicionais**
+
+O plano gerador pode ser usado em conjunto com outras ferramentas, como painéis de controle ou aplicativos móveis, para fornecer uma experiência completa ao usuário. Além disso, o plano gerador pode ser integrado com sistemas de pagamento para permitir que os usuários paguem seus planos online.
+
+Em resumo, a página web apresenta uma seção de perguntas frequentes, uma seção de modal com um resumo do plano gerado e um roteador (plano gerador) que permite que os usuários criem um plano personalizado. O plano gerador é uma ferramenta útil para ajudar os usuários a escolher um plano que atenda às suas necessidades específicas.
+================================================================================
+Arquivo: .\core\templates\faq.html
+Resumo:
+O arquivo `faq.html` exibe uma lista de perguntas e respostas sobre como contratar um plano da rede virtual Net. A estrutura do conteúdo é composta por:
+
+- Um título da página com a frase "FAQ - Rede Virtual Net"
+- Uma seção de conteúdo (`content`) que contém:
+  - Um título `h1` chamando a atenção para a FAQ
+  - Uma div de accordion (`accordion`) com um header com um botão que abre uma caixa de bloco (`collapse`)
+  - A caixa de bloco (`accordion-collapse`) contém o corpo da caixa de bloco, com um header (`accordion-header`) e um corpo (`accordion-body`)
+- O layout do accordion é configurado para ter um botão (`data-bs-toggle="collapse"`), um botão (`data-bs-target="#collapseOne"`) que faz a caixa de bloco se abrir quando pressionado, e um texto (`id` atribuído ao botão) que indica o título da pergunta.
+================================================================================
+Arquivo: .\core\templates\index.bak.html
+Resumo:
+A Laravel Blade template!
+
+Let's break down the code:
+
+**Header and Footer**
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Site de Fibra Óptica</title>
+</head>
+<body>
+    <!-- content goes here -->
+</body>
+</html>
+```
+The template starts with a `DOCTYPE` declaration, followed by the HTML document's language and character set.
+
+**Navigation Bar**
+```html
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+```
+The template includes a simple navigation bar with links to three pages: Home, About, and Contact.
+
+**Main Content**
+```html
+<div class="content">
+    <!-- content goes here -->
+</div>
+```
+This is the main content area of the page. The `content` div has an inline class `content`.
+
+**Section 1: Rede Virtual Net (Fibra Óptica)**
+```php
+<section class="section-1">
+    <h2>Rede Virtual Net (Fibra Óptica)</h2>
+    <!-- content goes here -->
+</section>
+```
+This section contains a heading and some content.
+
+**Section 2: Loja Lambari**
+```php
+<section class="section-2">
+    <h3>Loja Lambari</h3>
+    <!-- content goes here -->
+</section>
+```
+This section also has a heading, but it's specifically for the "Loja Lambari" (Lambari Shop).
+
+**Section 3: Loja Jesuânia**
+```php
+<section class="section-3">
+    <h4>Loja Jesuânia</h4>
+    <!-- content goes here -->
+</section>
+```
+This section is similar to the previous one, with a heading for "Loja Jesuânia".
+
+**Footer**
+```html
+<footer>
+    &copy; 2022 Site de Fibra Óptica
+</footer>
+```
+The template includes a simple footer with a copyright notice.
+
+Overall, this is a basic HTML structure with some Blade templating to insert dynamic content. The actual content and formatting would be defined in the Blade template files (e.g., `index.blade.php`, `about.blade.php`, etc.).
+================================================================================
+Arquivo: .\core\templates\index.html
+Resumo:
+Essa é uma código HTML que estrutura um site com três seções: uma ligação de imagem (modo "Modo Imagem"), uma loja virtual com dois modelos diferentes ("Modo Loja") e um formulário de contato.
+
+Aqui está uma explicação detalhada do código:
+
+**Ligação de Image**
+
+O código começa com a ligação de uma imagem (`<img src="..." alt="...">`). Nesse caso, a imagem é uma ligação para uma imagem no servidor.
+
+```html
+<img src="{{ asset('image.jpg') }}" alt="Imagem">
+```
+
+Essa linha carrega uma imagem chamada "image.jpg" em um arquivo local na pasta `public/images/`.
+
+**Modo Loja**
+
+O próximo seção é um modelo de "modo loja" (`<div class="modal modal-{{ id_modal }}">`).
+
+```html
+<div class="modal modal-{{ id_modal }}" style="width: 80%; margin: auto;">
+    {% include 'index/modal.html' with id=modaltabla.id_modal title="{{ modaltabla.title }}" body="{{ modaltabla.body }}" %}
+</div>
+```
+
+Esse código carrega um modelo de "modo loja" com o título e conteúdo `{{ modaltabla.title }}` e corpo `{{ modaltabla.body }}`. O id do modelo é atribuído a uma variável chamada `modaltabla`.
+
+**Lojas Virtuais**
+
+Agora, vamos aos modelos de "modo loja" com os nomes "Loja Lambari" e "Loja Jesuânia".
+
+```html
+<div class="modal modal-{{ id_modal }}" style="width: 80%; margin: auto;">
+    {% include 'index/modal.html' with id=Lambari.id_modal title="{{ Lambari.title }}" body="{{ Lambari.body }}" %}
+</div>
+
+<div class="modal modal-{{ id_modal }}" style="width: 80%; margin: auto;">
+    {% include 'index/modal.html' with id=Jesuânia.id_modal title="{{ Jesuânia.title }}" body="{{ Jesuânia.body }}" %}
+</div>
+```
+
+**Modais Dinâmicos**
+
+Para incluir os modais dinâmicos, o código usa a tag `<div class="modal modal-{{ id_modal }}">` e faz um loop com a variável `modals`.
+
+```html
+{% for modal in modals %}
+    {% include 'index/modal.html' with id=modal.id_modal title="{{ modal.title }}" body="{{ modal.body }}" %}
+{% endfor %}
+```
+
+Essa linha carrega cada modelo de "modo loja" e salva os dados em uma variável chamada `modals`. Em seguida, o código faz um loop com a variável `modals` e inclui cada modelo no formato `<div class="modal modal-{{ id_modal }}">`.
+
+**Conclusão**
+
+Em resumo, o código HTML cria três seções: uma ligação de imagem, dois modos de loja (`Loja Lambari` e `Loja Jesuânia`) e um formulário de contato. Cada modelo é carregado com os dados do lado do servidor e salva em variáveis que podem ser acessadas no código posterior.
+================================================================================
+Arquivo: .\core\templates\internet_fibra.html
+Resumo:
+O arquivo `internet_fibra.html` é um layout para uma página web que apresenta planos de internet em fibra óptica. A estrutura do conteúdo é a seguinte:
+
+1. **Seção principal dos planos**: O conteúdo é dividido em várias seções, incluindo:
+   - **SEÇÃO PRINCIPAL DOS PLANOS**: Uma introdução com um título e uma mensagem de incentivo para que os usuários escolham o plano que melhor atenda às suas necessidades.
+   - **PLANOS DE INTERNET EM FIBRA ÓPTICA**: Um ciclo que exibe cada plano, incluindo:
+     - Título do plano
+     - Descrição do plano
+     - Informações sobre a disponibilidade e os recursos do plano
+
+2. **Seção de localização**: O conteúdo é dividido em várias seções que apresentam informações sobre onde estão as unidades da empresa, incluindo:
+   - **Onde Estamos**: Uma introdução com uma mensagem de agradecimento para visitar as unidades.
+
+3. **Botão que abre o modal**: Existem dois botões que abririam um modal (um popup) se clicados: "Saiba mais sobre WiFiTurbo" e um botão não definido em este código, mas existente em outro lugar de sua aplicação.
+
+4. **Modal**: O conteúdo do modal é:
+   - Título do modal
+   - Mensagem do título
+   - Mensagem de close do modal
+
+O resto da página web parece ser uma configuração dinâmica com CSS, HTML e JavaScript para implementar o layout e a interação com o usuário.
+================================================================================
+Arquivo: .\core\templates\missao_visao_valores.html
+Resumo:
+O conteúdo extraído do arquivo é um arquivo HTML que defini a estrutura e o conteúdo de uma página web. Aqui está uma resumação da seção "Missão, Visão e Valores" (título: Missão, Visão e Valores - Rede Virtual Net) em forma clara e sem frases desnecessárias:
+
+- **Título**: A página apresenta um título que indica o conteúdo principal.
+- **Header de conteúdo**: Existem três seções ou "block" dentro do arquivo:
+  - Uma seção para o título da página, com uma referência ao nome da extensão do arquivo e um parágrafo explicando a missão da rede virtual net.
+  - Três seções alternas que correspondem às categorias de missão, visão e valores. Cada seção apresenta:
+    - Uma breve descrição que descreve cada uma das três categorias.
+    - Uma lista com os valores principais associados a cada categoria.
+
+Essa estrutura é típica em plantelas HTML como o 'base.html', o que sugere que essa página está sendo usada em um contexto de design responsivo para criar páginas web personalizadas.
+================================================================================
+Arquivo: .\core\templates\quem_somos.html
+Resumo:
+O arquivo `quem_somos.html` extensivo em 'base.html' é um template HTML que define uma página específica da aplicação web "Rede Virtual Net". A página parece ser uma intro de uma página oficial, onde se apresenta a identidade e missão da empresa.
+================================================================================
+Arquivo: .\core\templates\reclamacoes.html
+Resumo:
+O conteúdo extraído do arquivo `reclamacoes.html` é um formulário para registrar reclamações em uma plataforma virtual chamada Rede Virtual Net. O formulário tem um campo de texto para inscrição e uma button para enviar a reclamação. A página também inclui uma legenda que agradece os usuários por suas reclamações e informa sobre o processo de resolução.
+================================================================================
+Arquivo: .\core\templates\simulador_planos.html
+Resumo:
+O arquivo `simulador_planos.html` é uma extensão do template `base.html` para um site de planos de rede virtual. Ele fornece uma estrutura básica para a página do simulador, incluindo:
+
+* Uma título com o nome "Simulador de Planos - Rede Virtual Net"
+* Um cabeçalho que explora os serviços disponíveis no simulador
+* Uma descrição breve sobre como funciona o simulador
+
+A página contém um título principal e uma seção de descrição, onde é apresentado o objetivo do simulador: encontrar o plano ideal para o usuário.
+================================================================================
+Arquivo: .\core\templates\suporte_tecnico.html
+Resumo:
+O arquivo extenso 'suporte_tecnico.html' do template 'base.html' contém informações sobre o suporte técnico da rede Virtual Net, incluindo a extensão do arquivo, uma janela com título e conteúdo de cabeçalho "Suporte Técnico - Rede Virtual Net", um h1 com título "Suporte Técnico" e p com texto de descrição, uma lista com links para diferentes canais de comunicação.
+================================================================================
+Arquivo: .\core\templates\telefonia.html
+Resumo:
+O arquivo ".core/templates/telefonia.html" extensa é um template HTML para a página de telefonia da plataforma "Rede Virtual Net". O conteúdo do arquivo inclui:
+
+- Extensão do template padrão "base.html", que indica que essa página deve ser extensada.
+- Bloco "title", onde é definido o título da página, em português "Telefonia - Rede Virtual Net".
+- Bloco "content", onde é exibida a informação principal sobre os serviços de telefonia oferecidos pela plataforma.
+================================================================================
+Arquivo: .\core\templates\telemedicina.html
+Resumo:
+O conteúdo extraído do arquivo `telemedicina.html` consiste em:
+
+- Extende o template `base.html` para criar um novo conteúdo.
+- Adicione um título `Telemedicina - Rede Virtual Net`.
+- Em seguida, há uma seção de conteúdo chamada `content`, onde há:
+ - Uma introdução com o título "Telemedicina".
+ - Uma frase descrevendo a plataforma.
+ - Uma seção detalhando os serviços e benefícios da telemedicina.
+================================================================================
+Arquivo: .\core\templates\teste_velocidade.html
+Resumo:
+O arquivo `teste_velocidade.html` é um template HTML que exibe uma página com título e conteúdo básico. A estrutura do arquivo é simples, extensando um layout base chamado `base.html`. O bloco de conteúdo (`content`) inclui um heading e um parágrafo, mas não há nenhuma implementação específica de teste de velocidade ou incorpora um serviço externo.
+================================================================================
+Arquivo: .\core\templates\tv_streaming.html
+Resumo:
+O arquivo `tv_streaming.html` é um template HTML que extende o arquivo `base.html`, apresentando uma página de streaming da rede Virtual Net. A página inclui:
+
+* Um título com o nome da plataforma "TV e Streaming - Rede Virtual Net"
+* Uma introdução com um heading `<h1>TV e Streaming</h1>`
+* Uma seção de texto que explica os benefícios do serviço, destacando a qualidade de imagem e a variedade de conteúdos disponíveis para toda a família.
+
+Essa é uma descrição geral do conteúdo do arquivo. Se precisar de mais detalhes ou informações específicas, por favor forneça mais contexto ou perguntas.
+================================================================================
+Arquivo: .\core\templates\components\chat_widget.html
+Resumo:
+O conteúdo do arquivo `components/chat_widget.html` está reorganizado em um botão de chat no lado superior esquerdo da página. O botão tem uma icônica representação de mensagens de comentário com pontos na parte inferior da imagem (use).
+================================================================================
+Arquivo: .\core\templates\components\footer.html
+Resumo:
+O arquivo `components/footer.html` é um exemplo de layout para o footer de uma página web, com as seguintes características:
+
+* Utiliza o framework Bootstrap 4
+* Define um container para o footer contendo diferentes seções:
+ + Logo e breve descrição da empresa
+ + Links úteis (internet fibra, telefonia, telemedicina, TV & streaming, combos personalizados)
+ + Suporte e ferramentas (FAQ, suporte técnico, reclamações, simulador de planos, teste de velocidade)
+ + Institucional (quem somos, missão, visão e valores, contato)
+ + Newsletter com inscrição para se juntar à lista
+* Utiliza a função `a` para criar links diretos para as seções desejadas
+* Utiliza a função `svg` para adicionar ícones em forma de SVG ao HTML
+* Utiliza a função `text-white` e `text-decoration-none` para estilizar o texto
+* Utiliza a função `border-border-secondary border-1 opacity-75` para definir a cor e a opacidade do border
+* Utiliza a função `align-items-center` para centralizar os elementos em linha
+* Utiliza a função `justify-content-between` para justificar os elementos em colunas
+
+Em resumo, o arquivo `components/footer.html` é um exemplo de como criar um layout de footer personalizado para uma página web usando o framework Bootstrap 4 e estilizações de texto e ícones.
+================================================================================
+Arquivo: .\core\templates\components\header-desktop.html
+Resumo:
+O arquivo `header-desktop.html` é um template HTML que define o layout de cabeçalho da página para desktop. Aqui está uma resumação do conteúdo extraído:
+
+- O header possui uma navbar com logo, menu principal e itens de menu (início, planos, suporte, ferramentas, institucional).
+- O menu principal possui um dropdown que contém links a diferentes seções da aplicação, como internet fibra, telefonia, telemedicina, TV streaming, combos personalizados.
+- O dropdown suporte contém links a diferentes seções do suporte, incluindo FAQ, suporte técnico e reclamações.
+- O dropdown ferramentas possui um link a um simulador de planos e um teste de velocidade.
+- O dropdown institucional possui um link à página sobre quem somos, missão, visão e valores.
+- A seção social e tema inclui links para redes sociais e uma opção para ajustar o tema da página no desktop.
+================================================================================
+Arquivo: .\core\templates\components\header-mobile.html
+Resumo:
+O conteúdo apresentado é uma estrutura HTML para um menu principal mobile personalizado, incluindo links e botões para diferentes áreas do site. A estrutura inclui:
+
+* Uma navebars com logo, botão hamburguer ecollapse de menus;
+* Um dropdown para institucionalidade, planos e ferramentas;
+* Um dropdown para suporte;
+* Um elemento principal com link à área do cliente;
+* Um botão de alteração de tema;
+* Um grupo de links para diferentes áreas do site.
+
+Essa estrutura é feita com HTML5 e CSS3, utilizando estilos personalizados e imagens.
+================================================================================
+Arquivo: .\core\templates\components\social-icons.html
+Resumo:
+A lista de links para redes sociais é gerenciada por atributos `href` que fazem referência a URLs específicas. Exemplo: https://wa.me/seu-numero, https://tiktok.com/@seu-usuario, etc.
+================================================================================
+Arquivo: .\core\templates\components\toggle-theme.html
+Resumo:
+O componente `toggle-theme-btn` é um botão que permite alternar entre diferentes temas (claro e escuro) em um aplicativo. O botão tem uma icona de tema ativada e uma icône de tema desativada, que são usadas para representar os diferentes estados do theme.
+================================================================================
+Arquivo: .\core\templates\index\carrossel_servicos.html
+Resumo:
+O arquivo contém um código HTML para criar um carrossel de serviços com capacidade de rotação. O carrossel é configurado para aparecer apenas uma vez, sendo a imagem central.
+================================================================================
+Arquivo: .\core\templates\index\combos_tag.html
+Resumo:
+O conteúdo extraído do arquivo é uma lista de artigos (assinaturas) com detalhes sobre os preços e descrições das opções. Cada artigo inclui um botão para personalizar o combo e um link para assinar. A lista de assinaturas é gerenciada em um loop for, que exibe cada item da lista.
+================================================================================
+Arquivo: .\core\templates\index\modal.html
+Resumo:
+O conteúdo extraído do arquivo `modal.html` é um modais de erro visuais com o objetivo de alertar a pessoa sobre uma mensagem importante. Ele contém os seguintes elementos:
+
+- Uma estrutura HTML básica, incluindo tags de modal (`<div class="modal fade">`, `<button type="button"...`).
+- A classe `header-custom` é aplicada à div `modal-content`.
+- O título do modal é personalizado com a variável `title` e o nome da variável `id`.
+- Um botão de "Close" é adicionado para fechar o modal.
+- Uma linha de texto com um parâmetro de saída (`{{ text_animated }}`) é inserida no corpo do modal.
+- O conteúdo do corpo do modal pode ser alterado usando a tag `{% if %}` e o nome da variável `id`.
+- Se o id for igual à "sva_escolha", um botão para personalizar seu combo também é adicionado.
+================================================================================
+Arquivo: .\core\templates\index\sections\corporativas.html
+Resumo:
+O conteúdo extraído do arquivo é uma seção de corporativas que oferece soluções para empresas que buscam internet robusta, telefonia e conectividade avançada. A seção apresenta quatro produtos: Internet Dedicada, IP Fixo Corporativo, PABX e SIP. Cada produto tem um banner com informações detalhadas, incluindo nome do serviço, descrição e chamado para ação "Saiba Mais".
+================================================================================
+Arquivo: .\core\templates\index\sections\telefonia.html
+Resumo:
+O conteúdo extraído do arquivo "telefonia.html" é um formulário de seleção para serviços telefônicos e móveis, incluindo chamadas ilimitadas, planos pré e pós-pagos, roaming nacional sem custos adicionais, pacotes de dados móveis e atendimento ao cliente 24/7.
+================================================================================
+Arquivo: .\core\templates\index\sections\telmedicina.html
+Resumo:
+O conteúdo do arquivo `.html` é um elemento de uma página web chamado `telmedicina.html`. Ele é um seção contendo informações sobre a telemedicina, incluindo benefícios e recursos. O conteúdo inclui:
+
+- Uma introdução ao tema da telemedicina com um heading com texto animado
+- Uma lista de vantagens do uso da telemedicina, destacando consultas médicas online, acesso a especialistas 24/7, agendamento prático e redução de custos
+- Um conteúdo educativo sobre como se beneficiar da telemedicina
+- Um conteúdo visual com imagens de segurança médica, agendamento fácil e suporte médico.
+================================================================================
+Arquivo: .\core\templates\index\sections\tv-assinatura.html
+Resumo:
+O conteúdo do arquivo é um exemplo de uma página de indexagem para a plataforma "Virtual Net", que oferece serviços de streaming virtual. A página apresenta uma seção chamada "TV por Assinatura com Conteúdo" que lista os recursos disponíveis, incluindo canais variados, recursos interativos e inclusão de plataformas de streaming. Além disso, também está destacado o aplicativo Virtual Net.
+================================================================================
+Arquivo: .\core\templates\index\sections\tv-internet-fibra.html
+Resumo:
+O conteúdo extraído do arquivo é um formulário de oferta de internet com opções de velocidade e segurança. O formulário contém:
+
+- Um carrossel visualizando serviços de internet (carrosel_servicos.html)
+- Uma descrição da internet voando com fibra óptica
+- Benefícios de usar a fibra óptica, incluindo velocidade superior, maior segurança e suporte 24 horas por dia, 7 dias por semana
+- Um campo de escolha para opções de velocidades (velocidade_1.jpg, velocidade_2.jpg, velocidade_3.jpg)
+- Um botão com imagens de diferentes opções de segurança (seguranca.jpg, gamer-2.jpg, velocidade-1.jpg)
+================================================================================
+Arquivo: .\core\templatetags\custom_filters.py
+Resumo:
+Essas são as funções de filter e tag customizadas usadas na templates de Django:
+- `get_item(dictionary, key)`: Retorna o valor correspondente a um chave em uma lista se estiver presente. Se não, retorna None.
+- `to_uppercase(value)`: Converte todas as letras à maiúscula no valor passado.
+- `remove_extension(filename)`: Remove a extensão do nome de um arquivo, tratando casos com múltiplos pontos.
+- `render_carousel(carousel_id, carousel_internet, carousel_int_is_active, img_base_path)`: Retorna uma lista de dados para ser incluída em um template, indicando as informações necessárias para o carrossel.
+
+Cadeia de Funções:
+- Funções Definidas: ['get_item', 'to_uppercase', 'remove_extension', 'render_carousel']
+- Funções Chamadas: ['isinstance']
+- Funções Não Usadas: ['get_item', 'to_uppercase', 'remove_extension', 'render_carousel']
+================================================================================

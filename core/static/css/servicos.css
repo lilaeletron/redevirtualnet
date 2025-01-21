@@ -1,0 +1,16 @@
+.servicos-div-default {
+    width: 100%; /* Define a largura do elemento como 100% da largura do seu contêiner pai */
+    max-width: 600px; /* Define a largura máxima do elemento como 572px. Ele não poderá ser maior que esse valor, mesmo em telas grandes */
+    height: auto; /* Define uma altura fixa de 480px para o elemento. A altura não será alterada, mesmo se o conteúdo for maior */
+    padding: 0; /* Remove o preenchimento (espaço interno) do elemento, ou seja, não há espaço entre o conteúdo e as bordas */
+    margin: 0 auto; /* Centraliza o elemento horizontalmente dentro do contêiner pai. "0" define a margem superior e inferior, enquanto "auto" centraliza as margens laterais */
+    position: relative; /* Define o posicionamento do elemento como "relative", permitindo que elementos filhos com "position: absolute" sejam posicionados em relação a este elemento */
+    overflow: hidden; /* Garante que a imagem não ultrapasse as bordas */
+}
+
+.servicos-div-default img {
+    width: 600px;
+    height: 480px;
+    object-fit: cover; /* A imagem será ajustada sem corte */
+    display: block;
+}
